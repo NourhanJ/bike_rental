@@ -69,28 +69,18 @@
 											<div class="biked">
 												<div class="thumb-content">
 													<div class="price">$'.$rent_price_daily.'/d</div>
-													<a href="#">
+													<a href="single.php?id_bike='.$id_bike.'">
 														<img class="biked-img-top img-fluid" src="assets/'.$image.'" alt="biked image cap">
 													</a>
 												</div>
 												<div class="biked-body">
-													<h4 class="biked-title"><a href="#">'.$bike_name.'</a></h4>
+													<h4 class="biked-title"><a href="single.php?id_bike='.$id_bike.'">'.$bike_name.'</a></h4>
 													<ul class="list-inline product-meta">
 														<li class="list-inline-item">
-															<a href="#"><i class="fa fa-folder-open-o"></i> '.$brand.'</a>
+															<a href="single.php?id_bike='.$id_bike.'"><i class="fa fa-folder-open-o"></i> '.$brand.'</a>
 														</li>
 													</ul>
 													<p class="biked-text" style="height:60px; overflow: hidden; text-overflow: ellipsis;">'.$description.'</p>
-													<div class="product-ratings">
-														<ul class="list-inline">';
-															$bike_rating = '';
-															$i=0;
-															for($i;$i<$avg_rating;$i++)
-																$bike_rating.= '<li class="list-inline-item selected"><i class="fa fa-star" style="cursor:default;"></i></li>';
-															for($i;$i<5;$i++)
-																$bike_rating.= '<li class="list-inline-item"><i class="fa fa-star-o" style="cursor:default;"></i></li>';
-														$body_bike.= $bike_rating.'</ul>
-													</div>
 												</div>
 											</div>
 										</div>
@@ -143,7 +133,7 @@
 												<h4>'.$brand.'</h4>
 											</div>
 											<ul class="category-list" >
-												<li><a href="#">Total NB<span>'.$count.'</span></a></li>
+												<li><a href="">Total NB<span>'.$count.'</span></a></li>
 											</ul>
 										</div>
 									</div> 
