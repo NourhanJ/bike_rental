@@ -100,6 +100,27 @@ if ($conn->query($sql) === TRUE) {
 	echo "Error creating PROCEDURE bikeUpdateProcedure: " . $conn->error . "<br>";
 }
 
+//Create bike stock update Procedure
+$conn->query("DROP PROCEDURE IF EXISTS bikeStockUpdateProcedure");
+
+$sql = " CREATE PROCEDURE bikeStockUpdateProcedure (
+    IN bikeID INT,
+    IN s INT
+)
+BEGIN
+    UPDATE bike
+    SET stock = s
+    WHERE id_bike = bikeID;
+END;
+";
+
+if ($conn->query($sql) === TRUE) {
+    echo "PROCEDURE bikeStockUpdateProcedure created successfully<br>";
+} else {
+    echo "Error creating PROCEDURE bikeStockUpdateProcedure: " . $conn->error . "<br>";
+}
+
+
 
 //Create Request update Procedure
 $conn->query("DROP PROCEDURE IF EXISTS RequestUpdateProcedure");

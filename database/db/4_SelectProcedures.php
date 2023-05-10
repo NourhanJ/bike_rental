@@ -173,6 +173,23 @@ if ($conn->query($sql) === TRUE) {
 	echo "Error creating PROCEDURE SelectAllRequestProcedure: " . $conn->error . "<br>";
 }
 
+//Create SelectReviewRequest
+$conn->query("DROP PROCEDURE IF EXISTS SelectReviewRequestProcedure");
+$sql = "CREATE PROCEDURE SelectReviewRequestProcedure(IN user_id INT)
+		BEGIN
+		SELECT id_request,u.f_name,u.l_name,r.id_user,r.id_bike,reservation_date,request_status,nb_rent_days,total_price,r.creation_date, c.bike_name, c.image, c.brand, c.owner_id
+		FROM request AS r, bike AS c, users AS u
+		WHERE c.owner_id=user_id AND r.id_bike=c.id_bike
+		ORDER BY r.creation_date DESC;
+		END;
+	";
+
+if ($conn->query($sql) === TRUE) {
+	echo "PROCEDURE SelectReviewRequestProcedure created successfully<br>";
+} else {
+	echo "Error creating PROCEDURE SelectReviewRequestProcedure: " . $conn->error . "<br>";
+}
+
 
 //Create SelectUsersbikesNb
 $conn->query("DROP PROCEDURE IF EXISTS SelectUsersbikesNbProcedure");

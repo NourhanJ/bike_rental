@@ -10,9 +10,7 @@
     if(isset($_GET['id'])){
         $bike_id = $_GET['id'];
     }
-    if(isset($_GET['p'])){
-        $total = $_GET['p'];
-    }
+    
     if(!isset($_COOKIE['CR-userID']) || empty($_COOKIE['CR-userID'])){
         header("Location:login.php");
     }
@@ -21,7 +19,9 @@
         extract($_POST);
 
         $echo_msg = "";
-        $total = $_GET['p'] * $rent_days;
+        if(isset($_GET['p'])){
+            $total = $_GET['p'] * $rent_days;
+        }
 
         //insert to database
         REQUIRE_ONCE('database/db/0_Connection.php');
@@ -63,10 +63,12 @@
                             <h3>Rent Bike</h3>
                         </div>
                         <div class="col-lg-6">
+                            <input type="hidden" name="price" id="price" value="<?php echo $_GET['p']; ?>" />
                             <h6 class="font-weight-bold pt-4 pb-1">Reservation Date:</h6>
                             <input type="date" name="reservation" class="border p-3 w-100 my-2" required>
                             <h6 class="font-weight-bold pt-4 pb-1">Number of days:</h6>
                             <input type="number" name="rent_days" id="rent_days" class="border-0 w-100 p-2 bg-white text-capitalize" value="1" required>
+                            Total = <span class="totalprice">0</span>
                         </div>
                     </div>
             </fieldset>
@@ -82,6 +84,23 @@
 =            Footer            =
 =============================-->
 <?php require_once('footer.php'); ?>
+
+<script>
+    $(document).ready(function() {
+  // Attach an event handler to the "change" event of the input field
+  $('#rent_days').on('change', function() {
+    // Get the new value of the input field
+    var rentDays = $(this).val();
+
+    // Calculate the new total price based on the rent days value (replace this with your actual calculation logic)
+    var totalPrice = rentDays * $('#price').val();
+
+    // Update the text of the span element with the new total price
+    $('.totalprice').text(totalPrice);
+  });
+});
+
+</script>
 
 </body>
 

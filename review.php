@@ -25,13 +25,21 @@ if(isset($_GET['request']) && isset($_GET['status'])){
     $query = "UPDATE request SET request_status = ". $_GET['status'] ." WHERE id_request = " . $_GET['request'];
 
     if ($conn->query($query) === TRUE) {
-        echo "Record updated successfully";
+        if($temp = @mysqli_query($conn, "CALL SelectSinglebikeProcedure('".$id_bike."')")){
+            while($result = @mysqli_fetch_assoc($temp)){
+              if ($result != null) {
+                  extract($result);
+                  $s = $stock - 1;
+                  if($temp = @mysqli_query($conn, "CALL bikeStockUpdateProcedure('".$id_bike.", '".$s."')")){
+                    "<script>location.replace(\"review.php\");</script>";
+                  }
+              }
+            }
+        }
+        
     } else {
         echo "Error updating record: " . $conn->error;
     }
-    
-    // // Close the database connection
-    // $conn->close();
 }
 
 $req_count = [0,0,0,0];
@@ -39,7 +47,8 @@ $w_req = array();
 $a_req = array();
 $h_req = array();
 
-if($temp = @mysqli_query($conn, "CALL SelectAllRequestProcedure('0')")){
+// if($temp = @mysqli_query($conn, "CALL SelectReviewRequestProcedure('".$_COOKIE['CR-userID']."')")){
+if($temp = @mysqli_query($conn, "SELECT DISTINCT * FROM request JOIN users ON request.id_user = users.id_user JOIN bike ON request.id_bike = bike.id_bike WHERE bike.owner_id = '".$_COOKIE['CR-userID']."';")){
   while($result = @mysqli_fetch_assoc($temp))
     if ($result != null) {
       $req_count[0]++;
