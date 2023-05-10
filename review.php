@@ -25,30 +25,6 @@ if (isset($_GET['request']) && isset($_GET['status'])) {
     if($temp = @mysqli_query($conn, "CALL UpdateRequestAndDecrementStockProcedure('".$_GET['request']."', '".$_GET['status']."')")){
       echo "<script>location.replace(\"review.php\");</script>";
     }
-    // $query = "UPDATE request SET request_status = " . $_GET['status'] . " WHERE id_request = " . $_GET['request'];
-
-    // if ($conn->query($query) === TRUE) {
-    //     if ($temp = mysqli_query($conn, "CALL SelectSinglebikeProcedure('" . $id_bike . "')")) {
-    //         // Fetch and discard the result set
-    //         while ($result = mysqli_fetch_assoc($temp)) {
-    //             // Process the rows if needed
-    //         }
-    //         mysqli_free_result($temp);
-
-    //         // Execute the bike stock update procedure
-    //         $s = $stock - 1;
-    //         if ($temp = mysqli_query($conn, "CALL bikeStockUpdateProcedure('" . $id_bike . "', '" . $s . "')")) {
-    //             // Redirect to the review.php page
-    //             echo "<script>location.replace(\"review.php\");</script>";
-    //         } else {
-    //             echo "Error updating bike stock: " . mysqli_error($conn);
-    //         }
-    //     } else {
-    //         echo "Error fetching bike information: " . mysqli_error($conn);
-    //     }
-    // } else {
-    //     echo "Error updating record: " . $conn->error;
-    // }
 }
 
 $req_count = [0,0,0,0];
