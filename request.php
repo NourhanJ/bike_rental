@@ -11,6 +11,10 @@
 <?php
 REQUIRE_ONCE('database/db/0_Connection.php');
 
+if(!isset($_COOKIE['CR-userID']) || empty($_COOKIE['CR-userID'])){
+  print "<script>location.replace(\"login.php\");</script>";
+}
+
 if(isset($_POST['id'])){
 
 }

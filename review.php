@@ -12,6 +12,10 @@
 <?php
 REQUIRE_ONCE('database/db/0_Connection.php');
 
+if(!isset($_COOKIE['CR-userID']) || empty($_COOKIE['CR-userID'])){
+  print "<script>location.replace(\"login.php\");</script>";
+}
+
 $filter_status = 'All';
 if (isset($_GET['s']) && !empty($_GET['s'])){
   $filter_status = $_GET['s'];

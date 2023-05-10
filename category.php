@@ -8,6 +8,10 @@
 
 require_once('header.php'); 
 
+if(!isset($_COOKIE['CR-userID']) || empty($_COOKIE['CR-userID'])){
+	print "<script>location.replace(\"login.php\");</script>";
+}
+
 function filter($list){
 
 	//text

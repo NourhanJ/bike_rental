@@ -9,6 +9,10 @@
 ====================================-->
 <?php
 
+if(!isset($_COOKIE['CR-userID']) || empty($_COOKIE['CR-userID'])){
+    print "<script>location.replace(\"login.php\");</script>";
+}
+
 if(isset($_GET['f'])){
     print"
     <script>

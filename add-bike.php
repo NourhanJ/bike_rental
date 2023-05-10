@@ -6,7 +6,7 @@
     require_once('header.php'); 
 
     if(!isset($_COOKIE['CR-userID']) || empty($_COOKIE['CR-userID'])){
-        header("Location:login.php");
+        print "<script>location.replace(\"login.php\");</script>";
     }
     else if (isset($_POST['submit'])){
         extract($_POST);
