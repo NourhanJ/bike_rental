@@ -118,8 +118,8 @@ function filter($list){
               <img src="../images/user/vehicle.png" alt="" class="rounded-circle">
             </div>
             <!-- add vehicle -->
-            <h5 class="text-center">Add Your New Vehicle</h5>
-            <a href="add-vehicle.php" class="btn btn-main-sm">Add Vehicle</a>
+            <h5 class="text-center">Add Your New Bike</h5>
+            <a href="add-bike.php" class="btn btn-main-sm">Add Bike</a>
           </div>
           <!-- Dashboard Links -->
           <div class="widget user-dashboard-menu">
