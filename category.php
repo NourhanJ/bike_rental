@@ -358,12 +358,12 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 												<div class="biked">
 													<div class="thumb-content">
 														<div class="price">$'.$rent_price_daily.'/d</div>
-														<a href="single.php?id_bike='.$id_accessory.'">
+														<a href="single_accessory.php?id_accessory='.$id_accessory.'">
 															<img class="biked-img-top img-fluid" src="assets/'.$image.'" alt="biked image cap">
 														</a>
 													</div>
 													<div class="biked-body">
-														<h4 class="biked-title"><a href="single.php?id_bike='.$id_accessory.'">'.$accessory_name.'</a></h4>
+														<h4 class="biked-title"><a href="single_accessory.php?id_accessory='.$id_accessory.'">'.$accessory_name.'</a></h4>
 														<ul class="list-inline product-meta">
 															<li class="list-inline-item">
 																<a href="category.php?brand='.$brand.'"><i class="fa fa-folder-open-o"></i> '.$brand.'</a>
@@ -400,7 +400,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 										<div class="biked">
 											<div class="thumb-content">
 												<div class="price">$'.$rent_price_daily.'</div>
-												<a href="single.php?id_bike='.$id_bike.'">
+												<a href="single_accessory.php?id_bike='.$id_bike.'">
 													<img src="assets/'.$image.'" class="img-fluid" alt="">
 												</a>
 											</div>
@@ -412,7 +412,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 										<div class="col-lg-8 col-md-10">
 											<div class="ad-listing-content">
 												<div>
-													<a href="single.php?id_bike='.$id_bike.'" class="font-weight-bold">'.$bike_name.'</a>
+													<a href="single_accessory.php?id_bike='.$id_bike.'" class="font-weight-bold">'.$bike_name.'</a>
 												</div>
 												<ul class="list-inline mt-2 mb-3">
 													<li class="list-inline-item"><a href="category.php?brand='.$brand.'"> <i class="fa fa-folder-open-o"></i>'.$brand.'</a></li>
