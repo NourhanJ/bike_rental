@@ -35,7 +35,6 @@
 			   stock				int(11) not null,
 			   start_age			int(11) not null,
 			   end_age				int(11) not null,
-			   available            int(1) not null DEFAULT '1',
 			   creation_date        datetime not null DEFAULT CURRENT_TIMESTAMP,
 			   owner_id             int(11) not null,
 			   primary key (id_bike)
@@ -44,6 +43,29 @@
 
 			if(@mysqli_query($dbc,$query)){
 				print "table bike has created <br>";
+			}
+			else print 	'<p style="color: red;">Could not exec query because:<br/>' . mysqli_error($dbc) . '.</p>';
+
+			$query= "
+			create table bike_accessories
+			(
+			   id_accessory              int(10) not null AUTO_INCREMENT,
+			   accessory_name            text(50) not null,
+			   description          	 text(300) not null,
+			   category                  text(50) not null,
+			   rent_price_daily          float(5) not null,
+			   stock				     int(11) not null,
+			   owner_id             	 int(11) not null,
+			   material                  text(50) not null,
+			   color                	 text(50) not null,
+			   image                	 longtext not null,
+			   creation_date        datetime not null DEFAULT CURRENT_TIMESTAMP,
+			   primary key (id_accessory)
+			)		
+			";
+
+			if(@mysqli_query($dbc,$query)){
+				print "table bike_accessories has created <br>";
 			}
 			else print 	'<p style="color: red;">Could not exec query because:<br/>' . mysqli_error($dbc) . '.</p>';
 					
