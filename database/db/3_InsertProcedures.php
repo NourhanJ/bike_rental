@@ -123,7 +123,6 @@ $sql = " CREATE PROCEDURE bikeInsertProcedure (
 		IN material      text(50),
 		IN wheel_size    int(11),
 		IN color         text(50),
-		IN accessories   text(500),
 		IN img           text(50),
 		IN descr         text(300),
 		IN rpd     		 float(5),
@@ -133,8 +132,8 @@ $sql = " CREATE PROCEDURE bikeInsertProcedure (
 		IN owner_id      int(11)
 		)
 	BEGIN 
-		INSERT INTO `bike`(`bike_name`, `brand`, `material`, `wheel_size`, `color`, `accessories`, `image`, `description`, `rent_price_daily`, `stock`, `start_age`, `end_age`, `owner_id`)
-		VALUES (bikeName, brand, material, wheel_size, color, accessories, img, descr, rpd, stock, start_age, end_age, owner_id);
+		INSERT INTO `bike`(`bike_name`, `brand`, `material`, `wheel_size`, `color`, `image`, `description`, `rent_price_daily`, `stock`, `start_age`, `end_age`, `owner_id`)
+		VALUES (bikeName, brand, material, wheel_size, color, img, descr, rpd, stock, start_age, end_age, owner_id);
 
 		SELECT LAST_INSERT_ID();
 	END;
@@ -144,6 +143,33 @@ if ($conn->query($sql) === TRUE) {
 	echo "PROCEDURE bikeInsertProcedure created successfully<br>";
 } else {
 	echo "Error creating PROCEDURE bikeInsertProcedure: " . $conn->error . "<br>";
+}
+
+//Create bike insert Procedure
+$conn->query("DROP PROCEDURE IF EXISTS AccessoryInsertProcedure");
+$sql = " CREATE PROCEDURE AccessoryInsertProcedure (
+		IN accessory_name      text(50),
+		IN descr               text(50),
+		IN category      	   text(50),
+		IN rpd    			   float(5),
+		IN color         	   text(50),
+		IN img           	   text(50),
+		IN stock         	   int(11),
+		IN owner_id     	   int(11),
+		IN brand 			   text(50)
+		)
+	BEGIN 
+		INSERT INTO `bike_accessories`(`accessory_name`, `description`, `category`, `rent_price_daily`, `color`, `image`, `stock`, `owner_id`, `brand`)
+		VALUES (accessory_name, descr, category, rpd, color, img, stock, owner_id, brand);
+
+		SELECT LAST_INSERT_ID();
+	END;
+	";
+
+if ($conn->query($sql) === TRUE) {
+	echo "PROCEDURE AccessoryInsertProcedure created successfully<br>";
+} else {
+	echo "Error creating PROCEDURE AccessoryInsertProcedure: " . $conn->error . "<br>";
 }
 
 $conn->close();	

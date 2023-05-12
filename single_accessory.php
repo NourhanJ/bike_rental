@@ -38,7 +38,7 @@ if(isset($_GET['f'])){
 
 require_once('database/db/0_Connection.php');
 
-if($temp = @mysqli_query($conn, "CALL SelectSinglebikeProcedure('".$_GET['id_bike']."')")){
+if($temp = @mysqli_query($conn, "CALL SelectSingleaccessoryProcedure('".$_GET['id_accessory']."')")){
 	while($result = @mysqli_fetch_assoc($temp))
 		if ($result != null) {
 			extract($result);
@@ -54,27 +54,25 @@ if($temp = @mysqli_query($conn, "CALL SelectSinglebikeProcedure('".$_GET['id_bik
 							<div class="product-details">';
                             if($owner_id == $userid){
                                 print '<div style="color:green" class="text-center">
-                                <lable>The bike was added by you</lable>
+                                <lable>The accessory was added by you</lable>
                             </div>';
                             }
                             else{
                                 if($stock == 0){
                                     print '	<div style="color:red" class="text-center">
-													<lable>This Bike <b>is not</b> available.</lable>
+													<lable>This accessory <b>is not</b> available.</lable>
 												</div>';
                                 }
                                 else{
-                                    print '<a class="nav-link text-white btn-danger" href="rent.php?id='. $_GET['id_bike'] .'&p='. $rent_price_daily .'" style="text-align: center;"><i class="fa fa-power"></i>Rent Bike</a>';
+                                    print '<a class="nav-link text-white btn-danger" href="rent.php?id='. $_GET['id_accessory'] .'&p='. $rent_price_daily .'" style="text-align: center;"><i class="fa fa-power"></i>Rent accessory</a>';
                                 }
                             }
                                 print '
                                 <br>
-								<h1 class="product-title" id="name">'.$bike_name.'</h1>
+								<h1 class="product-title" id="name">'.$accessory_name.'</h1>
 								<div class="product-meta">
 									<ul class="list-inline">
                                     <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Brand: <a href="home.php?brand='.$brand.'">'.$brand.'</a></li>
-                                    <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Material: <a href="home.php?brand='.$material.'">'.$material.'</a></li>
-                                    <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Wheel Size: <a href="home.php?brand='.$wheel_size.'">'.$wheel_size.'</a></li>
                                     <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Color: <a href="home.php?brand='.$color.'">'.$color.'</a></li>
                                     <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Stock Quantity: <a href="home.php?brand='.$stock.'">'.$stock.'</a></li>
 									</ul>
@@ -147,7 +145,7 @@ try{
 		document.getElementById("total-price-req").innerHTML = total;
 	}
 
-	function send_request(user,bike){
+	function send_request(user,accessory){
 		if(document.forms["form_r"].checkValidity()){
 			Swal.fire({
 			title: 'Are you sure?',
@@ -162,7 +160,7 @@ try{
 				getTotal(document.getElementById("nb-rental-days").value,(document.getElementById("rpd").innerHTML).split("$")[0]);
 				const toSend = {
 						userID: user,
-						bikeID: bike,
+						accessoryID: accessory,
 						res_d:document.getElementById('res-date').value + ' ' + document.getElementById('res-time').value,
 						nb_rent_d: document.getElementById('nb-rental-days').value,
 						total_price: document.getElementById('total-price-req').innerHTML
@@ -180,11 +178,11 @@ try{
 	}
 }catch{}
 
-function send_feedback(user,bike){	
+function send_feedback(user,accessory){	
 	if(document.forms["form_f"].checkValidity()){
 		const toSend = {
 				userID: user,
-				bikeID: bike,
+				accessoryID: accessory,
 				rate: rate_value,
 				msg: document.getElementById('review').value
 		};
@@ -195,7 +193,7 @@ function send_feedback(user,bike){
 		xhr.setRequestHeader('Content-Type', 'application/json; charset = UTF-8');
 		xhr.send(josnString);
 
-		location.href = "?id_bike="+bike+"&f=";
+		location.href = "?id_accessory="+accessory+"&f=";
 		return false;
 	}
 }

@@ -190,7 +190,7 @@ document.getElementById('search_text').setAttribute("required");
 function search_filter(brand){
 	//text
 	if(document.getElementById('search_text').value != ""){
-		location.href = "category.php?brand=All&text=" + document.getElementById('search_text').value;
+		location.href = "category.php?item=bike&brand=All&text=" + document.getElementById('search_text').value;
 	}
 	return false;
 }

@@ -57,11 +57,17 @@
                               <li class="nav-item '; if($this_page == "index" || $this_page == "" ) print 'active';  print'">
                                   <a class="nav-link" href="index.php">Home</a>
                               </li>
-                              <li class="nav-item '; if($this_page == "add-bike") print 'active';  print'">
-                                  <a class="nav-link" href="add-bike.php">Add Bike</a>
+                              <li class="nav-item dropdown dropdown-slide '; if($this_page == "add-bike" || $this_page == "add-accessory") print 'active';  print'">
+                                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Add<span><i class="fa fa-angle-down"></i></span>
+                                  </a>
+                                  <!-- Dropdown list -->
+                                  <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="add-bike.php">Bikes</a>
+                                      <a class="dropdown-item" href="add-accessory.php">Accessories</a>
+                                  </div>
                               </li>
                               <li class="nav-item '; if($this_page == "category") print 'active';  print'">
-                                  <a class="nav-link" href="category.php ">Category</a>
+                                  <a class="nav-link" href="category.php?item=bike">Category</a>
                               </li>
                               <li class="nav-item dropdown dropdown-slide '; if($this_page == "request") print 'active';  print'">
                                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Requests<span><i class="fa fa-angle-down"></i></span>

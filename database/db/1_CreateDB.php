@@ -28,7 +28,6 @@
 			   material             text(50) not null,
 			   wheel_size           int(11) not null,
 			   color                text(50) not null,
-			   accessories          text(500) not null,
 			   image                longtext not null,
 			   description          text(300) not null,
 			   rent_price_daily     float(5) not null,
@@ -56,9 +55,9 @@
 			   rent_price_daily          float(5) not null,
 			   stock				     int(11) not null,
 			   owner_id             	 int(11) not null,
-			   material                  text(50) not null,
 			   color                	 text(50) not null,
 			   image                	 longtext not null,
+			   brand 					 text(50) not null,
 			   creation_date        datetime not null DEFAULT CURRENT_TIMESTAMP,
 			   primary key (id_accessory)
 			)		

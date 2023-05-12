@@ -31,11 +31,12 @@
             $echo_msg = "File uploaded successfully.";
 
             //insert to database
+            $selectedAccessories = isset($_POST['accessories']) ? implode(",", $_POST['accessories']) : '';
             REQUIRE_ONCE('database/db/0_Connection.php');
-            if($temp = @mysqli_query($conn, "CALL bikeInsertProcedure('$bikeName','$BrandType','$itemTr', '$wheel', '$color', '$newfilename','$desc','$rpd', '$stock', '$start_age', '$end_age', '$userid')")){
+            if($temp = @mysqli_query($conn, "CALL AccessoryInsertProcedure('$accessoryName', '$desc', '$itemTr', '$rpd', '$color', '$newfilename', '$stock', '$userid', '$BrandType')")){
                 while($result = @mysqli_fetch_assoc($temp))
                     if ($result != null) {
-                        print "<script>location.replace(\"single.php?id_bike=".$result['LAST_INSERT_ID()']."\");</script>";
+                        print "<script>location.replace(\"single_accessory.php?id_accessory=".$result['LAST_INSERT_ID()']."\");</script>";
                     }
             }
             else $echo_msg = $conn->error;
@@ -76,31 +77,31 @@
             <fieldset class="border border-gary p-4 mb-5">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h3>Post Your New Bike</h3>
+                            <h3>Post Your New Accessory</h3>
                         </div>
                         <div class="col-lg-6">
-                            <h6 class="font-weight-bold pt-4 pb-1">Bike Name:</h6>
-                            <input type="text" class="border-0 w-100 p-2 bg-white text-capitalize" name="bikeName" id="bikeName" minlength="2" maxlength="50" placeholder="Bike Name" required>
-                            <h6 class="font-weight-bold pt-4 pb-1">Frame Material:</h6>
+                            <h6 class="font-weight-bold pt-4 pb-1">Accessory Name:</h6>
+                            <input type="text" class="border-0 w-100 p-2 bg-white text-capitalize" name="accessoryName" id="accessoryName" minlength="2" maxlength="50" placeholder="Accessory Name" required>
+                            <h6 class="font-weight-bold pt-4 pb-1">Category:</h6>
                             <div class="row px-3">
                                 <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white">
-                                    <input type="radio" name="itemTr" value="Aluminum" id="Aluminum" style="cursor:pointer;" checked>
-                                    <label for="Aluminum" class="py-2" style="cursor:pointer;">Aluminum</label>
+                                    <input type="radio" name="itemTr" value="lights" id="lights" style="cursor:pointer;" checked>
+                                    <label for="lights" class="py-2" style="cursor:pointer;">lights</label>
                                 </div>
                                 <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
-                                    <input type="radio" name="itemTr" value="Fiber" id="Fiber" style="cursor:pointer;">
-                                    <label for="Fiber" class="py-2" style="cursor:pointer;">bikebon Fiber</label>
+                                    <input type="radio" name="itemTr" value="locks" id="locks" style="cursor:pointer;">
+                                    <label for="locks" class="py-2" style="cursor:pointer;">locks</label>
                                 </div>
                                 <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
-                                    <input type="radio" name="itemTr" value="Steel" id="Steel" style="cursor:pointer;">
-                                    <label for="Steel" class="py-2" style="cursor:pointer;">Steel</label>
+                                    <input type="radio" name="itemTr" value="helmets" id="helmets" style="cursor:pointer;">
+                                    <label for="helmets" class="py-2" style="cursor:pointer;">helmets</label>
                                 </div>
                                 <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
-                                    <input type="radio" name="itemTr" value="Titanium" id="Titanium" style="cursor:pointer;">
-                                    <label for="Titanium" class="py-2" style="cursor:pointer;">Titanium</label>
+                                    <input type="radio" name="itemTr" value="other" id="other" style="cursor:pointer;">
+                                    <label for="other" class="py-2" style="cursor:pointer;">other</label>
                                 </div>
                             </div>
-                            <h6 class="font-weight-bold pt-4 pb-1">Select Bike Color:</h6>
+                            <h6 class="font-weight-bold pt-4 pb-1">Select Accessory Color:</h6>
                             <select name="color" id="color" class="border-0 w-100 bg-white text-capitalize">
                                 <option value="Red">Red</option>
                                 <option value="Blue">Blue</option>
@@ -113,7 +114,7 @@
                             <textarea name="desc" id="desc" minlength="20" maxlength="300" class="border-0 p-3 w-100" rows="7" placeholder="Write details about your vehicle" required></textarea>
                             <div class="choose-file text-center pt-4 pb-1 rounded">
                                 <label for="file">
-                                    <span class="d-block font-weight-bold text-dark">bike Image</span>
+                                    <span class="d-block font-weight-bold text-dark">Accessory Image</span>
                                     <span class="d-block btn bg-primary text-white my-3 select-files ">Select image</span>
                                     <span class="d-block" id="fileName">You can select only one image.</span>
                                     <input type="file" accept="image/*" size="20" onchange="pop_name()" class="form-control-file d-none" id="file" name="file" required>
@@ -121,37 +122,29 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <h6 class="font-weight-bold pt-4 pb-1">Select Bike Brand:</h6>
+                            <h6 class="font-weight-bold pt-4 pb-1">Select Brand:</h6>
                             <select name="BrandType" id="BrandType" class="border-0 w-100 bg-white text-capitalize">
-                                <option value="Trek">Trek</option>
-                                <option value="Specialized">Specialized</option>
-                                <option value="Giant">Giant</option>
-                                <option value="Cannondale">Cannondale</option>
-                                <option value="Scott">Scott</option>
-                                <option value="Santa Cruz">Santa Cruz</option>
+                                <option value="GearMaster">GearMaster</option>
+                                <option value="CycleTech">CycleTech</option>
+                                <option value="RidePro">RidePro</option>
+                                <option value="PedalPower">PedalPower</option>
+                                <option value="SwiftRider">SwiftRider</option>
+                                <option value="AeroFit">AeroFit</option>
                                 <option value="other">Other</option>
                             </select>
-
-                            <h6 class="font-weight-bold pt-4 pb-1">Wheel Size(inch):</h6>
-                            <input type="number" name="wheel" id="wheel" class="border-0 w-100 p-2 bg-white text-capitalize" value="26" required>
                             
                             <h6 class="font-weight-bold pt-4 pb-1" style="margin-top:3%">Daily Rental Price ($ USD):</h6>
                             <input type="number" name="rpd" id="rpd" class="border-0 w-100 p-2 bg-white text-capitalize" min="1" max="200" value="30" required>
 
                             <h6 class="font-weight-bold pt-4 pb-1" style="margin-top:3%">Stock Quantity:</h6>
                             <input type="number" name="stock" id="stock" class="border-0 w-100 p-2 bg-white text-capitalize" min="1" max="200" value="30" required>
-
-                            <br>
-                            <h4 class="widget-header">Age Range:</h4>
-                            From: <input type="number" name="start_age" id="stock" class="border-0 p-2 bg-white text-capitalize" min="1" max="200" value="30" required>
-                            To: <input type="number" name="end_age" id="stock" class="border-0 p-2 bg-white text-capitalize" min="1" max="200" value="30" required>
                         </div>
                     </div>
             </fieldset>
             <!-- Post Your ad end -->
 
             <!-- submit button -->
-            <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary d-block mt-2">Post Your Bike</button>
+            <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary d-block mt-2">Post Your Accessory</button>
         </form>
     </div>
 </section>

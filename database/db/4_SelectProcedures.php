@@ -26,8 +26,8 @@ if ($conn->query($sql) === TRUE) {
 
 
 //Create SelectAllBrand
-$conn->query("DROP PROCEDURE IF EXISTS SelectAllBrandProcedure");
-$sql = "CREATE PROCEDURE SelectAllBrandProcedure ()
+$conn->query("DROP PROCEDURE IF EXISTS SelectAllBikeBrandProcedure");
+$sql = "CREATE PROCEDURE SelectAllBikeBrandProcedure ()
 		READS SQL DATA
 		BEGIN 
 			SELECT brand, COUNT(*) as count 
@@ -38,9 +38,27 @@ $sql = "CREATE PROCEDURE SelectAllBrandProcedure ()
 	";
 
 if ($conn->query($sql) === TRUE) {
-	echo "PROCEDURE SelectAllBrandProcedure created successfully<br>";
+	echo "PROCEDURE SelectAllBikeBrandProcedure created successfully<br>";
 } else {
-	echo "Error creating PROCEDURE SelectAllBrandProcedure: " . $conn->error . "<br>";
+	echo "Error creating PROCEDURE SelectAllBikeBrandProcedure: " . $conn->error . "<br>";
+}
+
+//Create SelectAllAccessoryBrand
+$conn->query("DROP PROCEDURE IF EXISTS SelectAllAccessoryBrandProcedure");
+$sql = "CREATE PROCEDURE SelectAllAccessoryBrandProcedure ()
+		READS SQL DATA
+		BEGIN 
+			SELECT brand, COUNT(*) as count 
+			FROM bike_accessories 
+			GROUP BY brand 
+			ORDER BY count DESC;
+		END;
+	";
+
+if ($conn->query($sql) === TRUE) {
+	echo "PROCEDURE SelectAllAccessoryBrandProcedure created successfully<br>";
+} else {
+	echo "Error creating PROCEDURE SelectAllAccessoryBrandProcedure: " . $conn->error . "<br>";
 }
 
 
@@ -75,6 +93,37 @@ if ($conn->query($sql) === TRUE) {
 	echo "Error creating PROCEDURE SelectAllbikesProcedure: " . $conn->error . "<br>";
 }
 
+//Create SelectAllbikes
+$conn->query("DROP PROCEDURE IF EXISTS SelectAllAccessoriesProcedure");
+$sql = "CREATE PROCEDURE SelectAllAccessoriesProcedure (
+			IN brand_value text(20)
+		)
+		READS SQL DATA
+		BEGIN 
+			IF (brand_value = 'All') THEN
+				SELECT bike.id_accessory, accessory_name, brand,category,image,color,stock,bike.description,rent_price_daily
+				FROM bike_accessories AS bike
+				ORDER BY bike.rent_price_daily;
+			ELSEIF (brand_value = '5-All') THEN
+				SELECT bike.id_accessory, accessory_name, brand,category,image,color,stock,bike.description,rent_price_daily
+				FROM bike_accessories AS bike
+				ORDER BY bike.rent_price_daily
+				LIMIT 5;
+			ELSE
+				SELECT bike.id_accessory, accessory_name, brand,category,image,color,stock,bike.description,rent_price_daily
+				FROM bike_accessories AS bike
+				WHERE bike.brand = brand_value
+				ORDER BY bike.rent_price_daily;
+			END IF;
+		END;
+	";
+
+if ($conn->query($sql) === TRUE) {
+	echo "PROCEDURE SelectAllAccessoriesProcedure created successfully<br>";
+} else {
+	echo "Error creating PROCEDURE SelectAllAccessoriesProcedure: " . $conn->error . "<br>";
+}
+
 
 //Create SelectSinglebike
 $conn->query("DROP PROCEDURE IF EXISTS SelectSinglebikeProcedure");
@@ -102,6 +151,27 @@ if ($conn->query($sql) === TRUE) {
 	echo "PROCEDURE SelectSinglebikeProcedure created successfully<br>";
 } else {
 	echo "Error creating PROCEDURE SelectSinglebikeProcedure: " . $conn->error . "<br>";
+}
+
+//Create SelectSinglebike
+$conn->query("DROP PROCEDURE IF EXISTS SelectSingleaccessoryProcedure");
+$sql = "CREATE PROCEDURE SelectSingleaccessoryProcedure (
+			IN accessoryID int(10)
+		)
+		READS SQL DATA
+		BEGIN 
+			DECLARE userID int(10);
+			SET userID = (SELECT AvailabilitybikeFunction(accessoryID));
+			SELECT *, userID 'id_user'
+			FROM bike_accessories
+			Where id_accessory = accessoryID;
+		END;
+	";
+
+if ($conn->query($sql) === TRUE) {
+	echo "PROCEDURE SelectSingleaccessoryProcedure created successfully<br>";
+} else {
+	echo "Error creating PROCEDURE SelectSingleaccessoryProcedure: " . $conn->error . "<br>";
 }
 
 
