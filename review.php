@@ -204,7 +204,7 @@ function filter($list){
                             if($request_status == 0){
                               print '
                               <li class="list-inline-item">
-                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Accept" href="review.php?request='.$id_request.'&status=4">
+                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Accept" href="review.php?request='.$id_request.'&status=1">
                                   <i class="fa fa-check"></i>
                                 </a>
                               </li>

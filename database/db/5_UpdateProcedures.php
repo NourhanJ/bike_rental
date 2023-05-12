@@ -133,12 +133,18 @@ BEGIN
     SET request_status = requestStatus
     WHERE id_request = requestID;
 
-    -- Decrement the stock of the bike by 1
-    UPDATE bike
-    SET stock = stock - 1
-    WHERE id_bike = bikeID;
-END;
-";
+    IF requestStatus = 2 THEN
+        -- Increment the stock of the bike by 1
+        UPDATE bike
+        SET stock = stock + 1
+        WHERE id_bike = bikeID;
+    ELSE
+        -- Decrement the stock of the bike by 1
+        UPDATE bike
+        SET stock = stock - 1
+        WHERE id_bike = bikeID;
+    END IF;
+END;";
 if ($conn->query($sql) === TRUE) {
     echo "PROCEDURE UpdateRequestAndDecrementStockProcedure created successfully<br>";
 } else {
