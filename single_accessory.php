@@ -64,7 +64,7 @@ if($temp = @mysqli_query($conn, "CALL SelectSingleaccessoryProcedure('".$_GET['i
 												</div>';
                                 }
                                 else{
-                                    print '<a class="nav-link text-white btn-danger" href="rent.php?id='. $_GET['id_accessory'] .'&p='. $rent_price_daily .'" style="text-align: center;"><i class="fa fa-power"></i>Rent accessory</a>';
+                                    print '<a class="nav-link text-white btn-danger" href="rent_accessory.php?id='. $_GET['id_accessory'] .'&p='. $rent_price_daily .'" style="text-align: center;"><i class="fa fa-power"></i>Rent accessory</a>';
                                 }
                             }
                                 print '

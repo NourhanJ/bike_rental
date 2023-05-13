@@ -113,7 +113,8 @@
 			(
 			   id_request           int(10) not null AUTO_INCREMENT,
 			   id_user              int(10) not null,
-			   id_bike               int(10) not null,
+			   id_bike               int(10),
+			   id_accessory 		 int (10),
 			   reservation_date     datetime not null,
 			   request_status       int(1) not null DEFAULT '0',
 			   nb_rent_days         int(3) not null,

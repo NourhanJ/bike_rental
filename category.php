@@ -105,7 +105,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 						<h4 class="widget-header">Items</h4>
 						<ul class="category-list">
 							<li><a href="category.php?item=bike">Bikes</a></li>	
-							<li><a href="category.php?item=accessory">Accessory</a></li>
+							<li><a href="category.php?item=accessory">Accessories</a></li>
 						</ul>
 					</div>
 					<?php

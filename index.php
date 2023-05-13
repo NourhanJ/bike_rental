@@ -80,7 +80,6 @@
 															<a href="single.php?id_bike='.$id_bike.'"><i class="fa fa-folder-open-o"></i> '.$brand.'</a>
 														</li>
 													</ul>
-													<p class="biked-text" style="height:60px; overflow: hidden; text-overflow: ellipsis;">'.$description.'</p>
 												</div>
 											</div>
 										</div>
@@ -109,15 +108,16 @@
 			<div class="col-12">
 				<!-- Section title -->
 				<div class="section-title">
-					<h2>All Brands</h2>
-					<p>Select your favorite brand!</p>
+					<h2>All Accessories</h2>
+					<p>Select your favorite!</p>
 				</div>
 				<div class="row">
-
+					<div class="col-lg-12">
+						<div class="trending-ads-slide">
 					<?php 
 						@mysqli_next_result($conn);
 
-						if($temp2 = @mysqli_query($conn, "CALL SelectAllBrandProcedure()")){
+						if($temp2 = @mysqli_query($conn, "CALL SelectAllAccessoriesProcedure('5-All')")){
 							$bg_count = 0;
 							while($result2 = @mysqli_fetch_assoc($temp2))
 								if ($result2 != null) {
@@ -126,17 +126,27 @@
 									$icon_bg = $bg_count + 1;
 									//put brand here
 									print'
-									<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-										<div class="category-block">
-											<div class="header">
-												<i class="fa fa-bicycle icon-bg-'.$icon_bg.'"></i> 
-												<h4>'.$brand.'</h4>
+									<div class="col-sm-12 col-lg-8">
+										<!-- product biked -->
+										<div class="product-item bg-light">
+											<div class="biked">
+												<div class="thumb-content">
+													<div class="price">$'.$rent_price_daily.'/d</div>
+													<a href="single_accessory.php?id_accessory='.$id_accessory.'">
+														<img class="biked-img-top img-fluid" src="assets/'.$image.'" alt="biked image cap">
+													</a>
+												</div>
+												<div class="biked-body">
+													<h4 class="biked-title"><a href="single_accessory.php?id_accessory='.$id_accessory.'">'.$accessory_name.'</a></h4>
+													<ul class="list-inline product-meta">
+														<li class="list-inline-item">
+															<a href="single_accessory.php?id_accessory='.$id_accessory.'"><i class="fa fa-folder-open-o"></i> '.$brand.'</a>
+														</li>
+													</ul>
+												</div>
 											</div>
-											<ul class="category-list" >
-												<li><a href="">Total NB<span>'.$count.'</span></a></li>
-											</ul>
 										</div>
-									</div> 
+									</div>
 									';
 									$bg_count = ($bg_count+1)%8;
 
@@ -144,7 +154,7 @@
 						}
 						$conn->close();	
 					?>
-	
+						</div></div>
 				</div>
 			</div>
 		</div>
