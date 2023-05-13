@@ -224,14 +224,14 @@ $sql = "CREATE PROCEDURE SelectAllRequestProcedure (
 		READS SQL DATA
 		BEGIN 
 			IF(userID = 0) THEN
-				SELECT id_request,u.f_name,u.l_name,r.id_user,r.id_bike,reservation_date,request_status,nb_rent_days,total_price,r.creation_date, c.bike_name, c.image, c.brand
-				FROM request AS r, bike AS c, users AS u
-				WHERE r.id_bike=c.id_bike AND r.id_user=u.id_user
+				SELECT id_request,u.f_name,u.l_name,r.id_user,r.id_bike,reservation_date,request_status,nb_rent_days,total_price,r.creation_date, c.bike_name, c.image, c.brand, r.id_accessory, a.id_accessory, a.accessory_name, a.description, a.category, a.rent_price_daily, a.stock, a.owner_id, a.color, a.image, a.brand, a.creation_date
+				FROM request AS r, bike AS c, users AS u, bike_accessories AS a
+				WHERE (r.id_bike=c.id_bike OR r.id_accessory=a.id_accessory) AND r.id_user=u.id_user
 				ORDER BY r.creation_date DESC;
 			ELSE
-				SELECT id_request,r.id_user,r.id_bike,reservation_date,request_status,nb_rent_days,total_price,r.creation_date, c.bike_name, c.image, c.brand
-				FROM request AS r, bike AS c
-				WHERE r.id_user=userID AND r.id_bike=c.id_bike
+				SELECT id_request,r.id_user,r.id_bike,reservation_date,request_status,nb_rent_days,total_price,r.creation_date, c.bike_name, c.image, c.brand, a.id_accessory, a.accessory_name, a.description, a.category, a.rent_price_daily, a.stock, a.owner_id, a.color, a.image, a.brand, a.creation_date
+				FROM request AS r, bike AS c, bike_accessories AS a
+				WHERE r.id_user=userID AND (r.id_bike=c.id_bike OR r.id_accessory=a.id_accessory)
 				ORDER BY r.creation_date DESC;
 			END IF;
 		END;
@@ -247,9 +247,9 @@ if ($conn->query($sql) === TRUE) {
 $conn->query("DROP PROCEDURE IF EXISTS SelectReviewRequestProcedure");
 $sql = "CREATE PROCEDURE SelectReviewRequestProcedure(IN user_id INT)
 		BEGIN
-		SELECT id_request,u.f_name,u.l_name,r.id_user,r.id_bike,reservation_date,request_status,nb_rent_days,total_price,r.creation_date, c.bike_name, c.image, c.brand, c.owner_id
-		FROM request AS r, bike AS c, users AS u
-		WHERE c.owner_id=user_id AND r.id_bike=c.id_bike
+		SELECT id_request,u.f_name,u.l_name,r.id_user,r.id_bike,reservation_date,request_status,nb_rent_days,total_price,r.creation_date, c.bike_name, c.image, c.brand, c.owner_id, a.id_accessory, a.accessory_name, a.description, a.category, a.rent_price_daily, a.stock, a.owner_id, a.color, a.image, a.brand, a.creation_date
+		FROM request AS r, bike AS c, users AS u, bike_accessories AS a
+		WHERE (c.owner_id=user_id OR a.owner_id=user_id) AND (r.id_bike=c.id_bike OR r.id_accessory=a.id_accessory)
 		ORDER BY r.creation_date DESC;
 		END;
 	";

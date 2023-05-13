@@ -33,7 +33,7 @@ $a_req = array();
 $h_req = array();
 
 // if($temp = @mysqli_query($conn, "CALL SelectReviewRequestProcedure('".$_COOKIE['CR-userID']."')")){
-if($temp = @mysqli_query($conn, "SELECT DISTINCT * FROM request JOIN users ON request.id_user = users.id_user JOIN bike ON request.id_bike = bike.id_bike WHERE bike.owner_id = '".$_COOKIE['CR-userID']."';")){
+if($temp = @mysqli_query($conn, "SELECT * FROM request, bike, bike_accessories, users WHERE (bike.owner_id = '".$_COOKIE['CR-userID']."' AND bike.id_bike = request.id_bike) OR (bike_accessories.owner_id = '".$_COOKIE['CR-userID']."' AND bike_accessories.id_accessory = request.id_accessory) GROUP BY request.id_request;")){
   while($result = @mysqli_fetch_assoc($temp))
     if ($result != null) {
       $req_count[0]++;
