@@ -151,6 +151,36 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating PROCEDURE UpdateRequestAndDecrementStockProcedure: " . $conn->error . "<br>";
 }
 
+//create UpdateRequestAccessoryStockProcedure
+$conn->query("DROP PROCEDURE IF EXISTS UpdateRequestAccessoryStockProcedure");
+$sql = "CREATE PROCEDURE UpdateRequestAccessoryStockProcedure(IN requestID int(11), IN requestStatus int(11))
+BEGIN
+    -- Declare and initialize the bikeID variable
+    DECLARE bikeID INT;
+    SET bikeID = (SELECT id_accessory FROM request WHERE id_request = requestID);
+
+    -- Update the status column in the request table
+    UPDATE request
+    SET request_status = requestStatus
+    WHERE id_request = requestID;
+
+    IF requestStatus = 2 THEN
+        -- Increment the stock of the bike by 1
+        UPDATE bike_accessories
+        SET stock = stock + 1
+        WHERE id_accessory = bikeID;
+    ELSE
+        -- Decrement the stock of the bike by 1
+        UPDATE bike_accessories
+        SET stock = stock - 1
+        WHERE id_accessory = bikeID;
+    END IF;
+END;";
+if ($conn->query($sql) === TRUE) {
+    echo "PROCEDURE UpdateRequestAccessoryStockProcedure created successfully<br>";
+} else {
+    echo "Error creating PROCEDURE UpdateRequestAccessoryStockProcedure: " . $conn->error . "<br>";
+}
 
 
 //Create Request update Procedure

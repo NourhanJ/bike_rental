@@ -22,8 +22,15 @@ if (isset($_GET['s']) && !empty($_GET['s'])){
 }
 
 if (isset($_GET['request']) && isset($_GET['status'])) {
-    if($temp = @mysqli_query($conn, "CALL UpdateRequestAndDecrementStockProcedure('".$_GET['request']."', '".$_GET['status']."')")){
-      echo "<script>location.replace(\"review.php\");</script>";
+    if(isset($_GET['item']) && $_GET['item'] == 'b'){
+      if($temp = @mysqli_query($conn, "CALL UpdateRequestAndDecrementStockProcedure('".$_GET['request']."', '".$_GET['status']."')")){
+        echo "<script>location.replace(\"review.php\");</script>";
+      }
+    }
+    else{
+      if($temp = @mysqli_query($conn, "CALL UpdateRequestAccessoryStockProcedure('".$_GET['request']."', '".$_GET['status']."')")){
+        echo "<script>location.replace(\"review.php\");</script>";
+      }
     }
 }
 
@@ -186,6 +193,14 @@ function filter($list){
                     $color = 'green';
                   }
 
+                  if(isset($id_accessory) && $id_accessory != NULL){
+                    $single = "single_accessory.php?id_accessory='". $id_accessory ."'";
+                    $type = "a";
+                  }
+                  else{
+                    $single = "single.php?id_bike='". $id_bike ."'";
+                    $type = "b";
+                  }
                   print '
                     <tr id=req-'.$id_request.'>
                       <td class="product-thumb">
@@ -204,12 +219,12 @@ function filter($list){
                             if($request_status == 0){
                               print '
                               <li class="list-inline-item">
-                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Accept" href="review.php?request='.$id_request.'&status=1">
+                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Accept" href="review.php?item='.$type.'&request='.$id_request.'&status=1">
                                   <i class="fa fa-check"></i>
                                 </a>
                               </li>
                               <li class="list-inline-item">
-                                <a class="delete" data-toggle="tooltip" data-placement="top" title="Reject" href="review.php?request='.$id_request.'&status=3">
+                                <a class="delete" data-toggle="tooltip" data-placement="top" title="Reject" href="review.php?item='.$type.'&request='.$id_request.'&status=3">
                                   <i class="fa fa-trash"></i>
                                 </a>
                               </li>
@@ -218,12 +233,12 @@ function filter($list){
                             else if($request_status == 4){
                               print '
                               <li class="list-inline-item">
-                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Active" href="review.php?request='.$id_request.'&status=1">
+                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Active" href="review.php?item='.$type.'&request='.$id_request.'&status=1">
                                   <i class="fa fa-check"></i>
                                 </a>
                               </li>
                               <li class="list-inline-item">
-                                <a class="delete" data-toggle="tooltip" data-placement="top" title="Reject" href="review.php?request='.$id_request.'&status=3">
+                                <a class="delete" data-toggle="tooltip" data-placement="top" title="Reject" href="review.php?item='.$type.'&request='.$id_request.'&status=3">
                                   <i class="fa fa-trash"></i>
                                 </a>
                               </li>
@@ -231,7 +246,7 @@ function filter($list){
                             }else if($request_status == 1){
                               print '
                               <li class="list-inline-item">
-                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Finish" href="review.php?request='.$id_request.'&status=2">
+                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Finish" href="review.php?item='.$type.'&request='.$id_request.'&status=2">
                                   <i class="fa fa-handshake-o"></i>
                                 </a>
                               </li>
