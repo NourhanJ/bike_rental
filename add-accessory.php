@@ -5,16 +5,21 @@
 <?php
     require_once('header.php'); 
 
+    //check if user is logged in
     if(!isset($_COOKIE['CR-userID']) || empty($_COOKIE['CR-userID'])){
+        //redirect to login if not logged in
         print "<script>location.replace(\"login.php\");</script>";
     }
     else if (isset($_POST['submit'])){
+        //extract values from POST request
         extract($_POST);
 
         $echo_msg = "";
 
+        //Get user ID from cookie
         $userid = $_COOKIE['CR-userID'];
 
+        //Retrieve file information
         $filename = $_FILES["file"]["name"];
         $file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
         $file_ext = substr($filename, strripos($filename, '.')); // get file name
@@ -27,15 +32,16 @@
             // Rename file
             $newfilename = "image-" . time() . $file_ext;
 
+            //move uploaded file to destination folder
             move_uploaded_file($_FILES["file"]["tmp_name"], "assets/" . $newfilename);
             $echo_msg = "File uploaded successfully.";
 
-            //insert to database
-            $selectedAccessories = isset($_POST['accessories']) ? implode(",", $_POST['accessories']) : '';
+            //insert data into database
             REQUIRE_ONCE('database/db/0_Connection.php');
             if($temp = @mysqli_query($conn, "CALL AccessoryInsertProcedure('$accessoryName', '$desc', '$itemTr', '$rpd', '$color', '$newfilename', '$stock', '$userid', '$BrandType')")){
                 while($result = @mysqli_fetch_assoc($temp))
                     if ($result != null) {
+                        //redirect to accessories details page with the ID
                         print "<script>location.replace(\"single_accessory.php?id_accessory=".$result['LAST_INSERT_ID()']."\");</script>";
                     }
             }
@@ -59,6 +65,7 @@
             unlink($_FILES["file"]["tmp_name"]);
         }
 
+        //Display error message using SweetAlert library
         echo "<script>
             Swal.fire({
                 icon: 'error',
@@ -156,32 +163,35 @@
 
 <script>
 function pop_name(){
-  var x = document.getElementById("file");
-  var txt = "";
+  var x = document.getElementById("file"); //Get the file input element
+  var txt = ""; //Initialize an empty string for storing the file info
   if ('files' in x) {
+    //check if files property is supported by browser
     if (x.files.length == 0) {
-      txt = "You can select only one image.";
+      txt = "You need to select an image."; //display a message if no files were selected
     } else {
+        //Iterate through the selected files
       for (var i = 0; i < x.files.length; i++) {
-        //txt += "<br><strong>" + (i+1) + ". file</strong><br>";
-        var file = x.files[i];
+        var file = x.files[i]; //get the current file
         if ('name' in file) {
-            txt += "name: " + file.name;
+            txt += "name: " + file.name; //append file name to the output
         }
         if ('size' in file) {
-          txt += ", size: " + file.size + " bytes";
+          txt += ", size: " + file.size + " bytes"; //append file size
         }
       }
     }
   } 
   else {
+    //the files property is not supported by the browser
     if (x.value == "") {
-      txt += "Select one or more files.";
+      txt += "Select one or more files."; //display a message to select file
     } else {
       txt += "The files property is not supported by your browser!";
       txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
     }
   }
+  //update the content of the HTML element with id "fileName" to display the file information
   document.getElementById("fileName").innerHTML = txt;
 }
 </script>

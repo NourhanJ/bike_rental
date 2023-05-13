@@ -3,17 +3,20 @@
 <head>
 
 <?php
-    require_once('header.php'); 
+    require_once('header.php'); //include the 'header.php' file
 
+    //check if user is logged in
     if(!isset($_COOKIE['CR-userID']) || empty($_COOKIE['CR-userID'])){
+        //redirect the user to the login page
         print "<script>location.replace(\"login.php\");</script>";
     }
+    //if the form is submitted
     else if (isset($_POST['submit'])){
-        extract($_POST);
+        extract($_POST); //extract form data into separate variables
 
-        $echo_msg = "";
+        $echo_msg = ""; //initialize an empty variable for storing error or success message
 
-        $userid = $_COOKIE['CR-userID'];
+        $userid = $_COOKIE['CR-userID']; //get user id from cookies
 
         $filename = $_FILES["file"]["name"];
         $file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
@@ -58,6 +61,7 @@
             unlink($_FILES["file"]["tmp_name"]);
         }
 
+        //display an error message using the SweetAlert library
         echo "<script>
             Swal.fire({
                 icon: 'error',

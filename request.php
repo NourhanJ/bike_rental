@@ -11,12 +11,9 @@
 <?php
 REQUIRE_ONCE('database/db/0_Connection.php');
 
+//check if user is logged in
 if(!isset($_COOKIE['CR-userID']) || empty($_COOKIE['CR-userID'])){
   print "<script>location.replace(\"login.php\");</script>";
-}
-
-if(isset($_POST['id'])){
-
 }
 
 $filter_status = 'All';
@@ -29,6 +26,7 @@ $w_req = array();
 $a_req = array();
 $h_req = array();
 
+//get all requests from database
 if($temp = @mysqli_query($conn, "CALL SelectAllRequestProcedure('".$_COOKIE['CR-userID']."')")){
   while($result = @mysqli_fetch_assoc($temp))
     if ($result != null) {
