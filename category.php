@@ -109,12 +109,12 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 						</ul>
 					</div>
 					<?php
-					if($_GET['item'] == "bike"){
+					if(isset($_GET['item']) && $_GET['item'] == "bike"){
 						?>
 						<div class="widget category-list">
 						<h4 class="widget-header">Bike Brand</h4>
 						<ul class="category-list">
-							<li><a href="category.php">All </a></li>
+							<li><a href="category.php?item=bike">All </a></li>
 							<?php 
 
 								if($temp = @mysqli_query($conn, "CALL SelectAllBrandProcedure()")){
@@ -135,12 +135,12 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 					?>
 
 					<?php 
-					if($_GET['item'] == "accessory"){
+					if(isset($_GET['item']) && $_GET['item'] == "accessory"){
 						?>
 						<div class="widget category-list">
 						<h4 class="widget-header">Accessory Brand</h4>
 						<ul class="category-list">
-							<li><a href="category.php">All </a></li>
+							<li><a href="category.php?item=accessory">All </a></li>
 							<?php 
 								if($temp = @mysqli_query($conn, "CALL SelectAllAccessoryBrandProcedure()")){
 									while($result = @mysqli_fetch_assoc($temp))
@@ -160,7 +160,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 					?>
 
 					<?php
-					if($_GET['item'] == "bike"){
+					if(isset($_GET['item']) && $_GET['item'] == "bike"){
 					?>
 					<div class="widget price-range w-100">
 						<h4 class="widget-header">Bike Material</h4>
@@ -182,7 +182,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 					<?php } ?>
 
 					<?php 
-					if($_GET['item'] == "accessory"){
+					if(isset($_GET['item']) && $_GET['item'] == "accessory"){
 					?>
 					<div class="widget price-range w-100">
 						<h4 class="widget-header">Accessories Category</h4>
@@ -201,7 +201,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 					<?php } ?>
 
 					<?php 
-					if($_GET['item'] == "bike"){
+					if(isset($_GET['item']) && $_GET['item'] == "bike"){
 					?>
 					<div class="widget price-range w-100">
 						<h4 class="widget-header">Bike Color</h4>
@@ -218,7 +218,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 					<?php } ?>
 
 					<?php 
-					if($_GET['item'] == "accessory"){
+					if(isset($_GET['item']) && $_GET['item'] == "accessory"){
 					?>
 					<div class="widget price-range w-100">
 						<h4 class="widget-header">Accessory Color</h4>
@@ -287,7 +287,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 					<?php
 						@mysqli_next_result($conn);
 
-						if($_GET['item'] == "bike"){
+						if(isset($_GET['item']) && $_GET['item'] == "bike"){
 							if($temp = @mysqli_query($conn, "CALL SelectAllbikesProcedure('".$brand_selected."')")){
 								while($result = @mysqli_fetch_assoc($temp))
 									if ($result != null) {
