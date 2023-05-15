@@ -66,8 +66,14 @@
                                       <a class="dropdown-item" href="add-accessory.php">Accessories</a>
                                   </div>
                               </li>
-                              <li class="nav-item '; if($this_page == "category") print 'active';  print'">
-                                  <a class="nav-link" href="category.php?item=bike">Category</a>
+                              <li class="nav-item dropdown dropdown-slide '; if($this_page == "bikes" || $this_page == "accessories") print 'active';  print'">
+                                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Items<span><i class="fa fa-angle-down"></i></span>
+                                  </a>
+                                  <!-- Dropdown list -->
+                                  <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="bikes.php">Bikes</a>
+                                      <a class="dropdown-item" href="accessories.php">Accessories</a>
+                                  </div>
                               </li>
                               <li class="nav-item dropdown dropdown-slide '; if($this_page == "request") print 'active';  print'">
                                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Requests<span><i class="fa fa-angle-down"></i></span>

@@ -2,6 +2,9 @@
 $br = "All";
 if(isset($_GET['brand']) && !empty($_GET['brand']))
     $br = $_GET['brand'];
+if(isset($_GET['item']) && !empty($_GET['item'])){
+    $br .= "&item=" . $_GET['item'];
+}
 print '
 <form action="#">
 <div class="form-row">

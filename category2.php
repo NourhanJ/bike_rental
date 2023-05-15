@@ -21,7 +21,7 @@ function filter($list){
 	}
 
 	//material
-	if(isset($_GET['tr']) && !empty($_GET['tr'])){
+	if(isset($_GET['material']) && !empty($_GET['material'])){
 		if($list['material'] != $_GET['tr'])
 			return false;
 	}
@@ -484,9 +484,9 @@ function search_filter(brand){
 	
 	var link = "category.php?brand="+brand;
 	
-	//material
-	var tr_val = $('input[name="itemName"]:checked').val();
-	if(tr_val != "All")	link+= "&tr="+tr_val;
+	//bike material
+	var tr_val = $('input[name="bikeMaterial"]:checked').val();
+	link+= "&material="+tr_val;
 
 	//color
 	var color = document.getElementById('color').value;
