@@ -70,14 +70,14 @@
 												<div class="thumb-content">
 													<div class="price">$'.$rent_price_daily.'/d</div>
 													<a href="single.php?id_bike='.$id_bike.'">
-														<img class="biked-img-top img-fluid" src="assets/'.$image.'" alt="biked image cap">
+														<img class="biked-img-top img-fluid" src="assets/'.$bike_image.'" alt="biked image cap">
 													</a>
 												</div>
 												<div class="biked-body">
 													<h4 class="biked-title"><a href="single.php?id_bike='.$id_bike.'">'.$bike_name.'</a></h4>
 													<ul class="list-inline product-meta">
 														<li class="list-inline-item">
-															<a href="single.php?id_bike='.$id_bike.'"><i class="fa fa-folder-open-o"></i> '.$brand.'</a>
+															<a href="single.php?id_bike='.$id_bike.'"><i class="fa fa-folder-open-o"></i> '.$bike_brand.'</a>
 														</li>
 													</ul>
 												</div>
@@ -133,14 +133,14 @@
 												<div class="thumb-content">
 													<div class="price">$'.$rent_price_daily.'/d</div>
 													<a href="single_accessory.php?id_accessory='.$id_accessory.'">
-														<img class="biked-img-top img-fluid" src="assets/'.$image.'" alt="biked image cap">
+														<img class="biked-img-top img-fluid" src="assets/'.$accessory_image.'" alt="biked image cap">
 													</a>
 												</div>
 												<div class="biked-body">
 													<h4 class="biked-title"><a href="single_accessory.php?id_accessory='.$id_accessory.'">'.$accessory_name.'</a></h4>
 													<ul class="list-inline product-meta">
 														<li class="list-inline-item">
-															<a href="single_accessory.php?id_accessory='.$id_accessory.'"><i class="fa fa-folder-open-o"></i> '.$brand.'</a>
+															<a href="single_accessory.php?id_accessory='.$id_accessory.'"><i class="fa fa-folder-open-o"></i> '.$accessory_brand.'</a>
 														</li>
 													</ul>
 												</div>
@@ -200,7 +200,7 @@ document.getElementById('search_text').setAttribute("required");
 function search_filter(brand){
 	//text
 	if(document.getElementById('search_text').value != ""){
-		location.href = "category.php?item=bike&brand=All&text=" + document.getElementById('search_text').value;
+		location.href = "bikes.php?brand=All&text=" + document.getElementById('search_text').value;
 	}
 	return false;
 }

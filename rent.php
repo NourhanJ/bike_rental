@@ -25,7 +25,7 @@
 
         //insert to database
         REQUIRE_ONCE('database/db/0_Connection.php');
-        $query = "INSERT INTO request (`id_user`, `id_bike`, `reservation_date`, `nb_rent_days`, `total_price`) VALUES ('$userid', '$bike_id', '$reservation', '$rent_days', '$total')";
+        $query = "INSERT INTO request (`id_user`, `id_bike`, `request_type`, `reservation_date`, `nb_rent_days`, `total_price`) VALUES ('$userid', '$bike_id', 'bike', '$reservation', '$rent_days', '$total')";
         include('database/db/0_Connection.php');
         if(mysqli_query($conn, $query)){
             print "<script>location.replace(\"request.php\");</script>";

@@ -72,7 +72,7 @@ if($temp = @mysqli_query($conn, "CALL SelectSinglebikeProcedure('".$_GET['id_bik
 								<h1 class="product-title" id="name">'.$bike_name.'</h1>
 								<div class="product-meta">
 									<ul class="list-inline">
-                                    <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Brand: <a href="home.php?brand='.$brand.'">'.$brand.'</a></li>
+                                    <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Brand: <a href="#">'.$bike_brand.'</a></li>
                                     <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Material: <a href="home.php?brand='.$material.'">'.$material.'</a></li>
                                     <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Wheel Size: <a href="home.php?brand='.$wheel_size.'">'.$wheel_size.'</a></li>
                                     <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Color: <a href="home.php?brand='.$color.'">'.$color.'</a></li>
@@ -81,8 +81,8 @@ if($temp = @mysqli_query($conn, "CALL SelectSinglebikeProcedure('".$_GET['id_bik
 								</div>
 
 								<!-- product slider -->
-									<div class="my-4" data-image="assets/'.$image.'">
-										<img class="img-fluid w-100" src="assets/'.$image.'" alt="product-img">
+									<div class="my-4" data-image="assets/'.$bike_image.'">
+										<img class="img-fluid w-100" src="assets/'.$bike_image.'" alt="product-img">
 									</div>
 								<!-- product slider -->
 
@@ -95,7 +95,7 @@ if($temp = @mysqli_query($conn, "CALL SelectSinglebikeProcedure('".$_GET['id_bik
 									</ul>
 									<div class="tab-content" id="pills-tabContent">
 										<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-											<h3 class="tab-title">Vehicle Description</h3>
+											<h3 class="tab-title">Bike Description</h3>
 											<p>'.$description.'</p>
 
 										</div>

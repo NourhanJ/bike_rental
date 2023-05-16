@@ -114,7 +114,7 @@
                                 <option value="other">Other</option>
                             </select>
                             <h6 class="font-weight-bold pt-4 pb-1">Description:</h6>
-                            <textarea name="desc" id="desc" minlength="20" maxlength="300" class="border-0 p-3 w-100" rows="7" placeholder="Write details about your vehicle" required></textarea>
+                            <textarea name="desc" id="desc" minlength="20" maxlength="300" class="border-0 p-3 w-100" rows="7" placeholder="Write details about your bike" required></textarea>
                             <div class="choose-file text-center pt-4 pb-1 rounded">
                                 <label for="file">
                                     <span class="d-block font-weight-bold text-dark">bike Image</span>

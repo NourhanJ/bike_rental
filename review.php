@@ -22,7 +22,7 @@ if (isset($_GET['s']) && !empty($_GET['s'])){
 }
 
 if (isset($_GET['request']) && isset($_GET['status'])) {
-    if(isset($_GET['item']) && $_GET['item'] == 'b'){
+    if(isset($_GET['item']) && $_GET['item'] == 'bike'){
       if($temp = @mysqli_query($conn, "CALL UpdateRequestAndDecrementStockProcedure('".$_GET['request']."', '".$_GET['status']."')")){
         echo "<script>location.replace(\"review.php\");</script>";
       }
@@ -73,28 +73,6 @@ function filter($list){
   return true;
 }
 ?>
-
-<section class="page-search">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<!-- Advance Search -->
-				<div class="advance-search">
-					<form action="#" id="form_search">
-						<div class="form-row">
-							<div class="form-group col-md-10">
-								<input type="text" class="form-control my-2 my-lg-1" id="search_text" placeholder="What are you looking for..">
-							</div>
-							<div class="form-group col-md-2 align-self-center">
-								<button onclick="return search_filter('<?php echo $filter_status; ?>')" class="btn btn-primary">Search Now</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
 
 <section class="dashboard section">
   <!-- Container Start -->
@@ -201,6 +179,17 @@ function filter($list){
                     $single = "single.php?id_bike='". $id_bike ."'";
                     $type = "b";
                   }
+
+                  if($request_type == "bike"){
+                    $single = "single.php?id_bike=" . $id_bike;
+                    $brand = $bike_brand;
+                    $image = $bike_image;
+                  }
+                  else{
+                    $single = "single_accessory.php?id_accessory=" . $id_accessory;
+                    $brand = $accessory_brand;
+                    $image = $accessory_image;
+                  }
                   print '
                     <tr id=req-'.$id_request.'>
                       <td class="product-thumb">
@@ -219,12 +208,12 @@ function filter($list){
                             if($request_status == 0){
                               print '
                               <li class="list-inline-item">
-                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Accept" href="review.php?item='.$type.'&request='.$id_request.'&status=1">
+                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Accept" href="review.php?item='.$request_type.'&request='.$id_request.'&status=1">
                                   <i class="fa fa-check"></i>
                                 </a>
                               </li>
                               <li class="list-inline-item">
-                                <a class="delete" data-toggle="tooltip" data-placement="top" title="Reject" href="review.php?item='.$type.'&request='.$id_request.'&status=3">
+                                <a class="delete" data-toggle="tooltip" data-placement="top" title="Reject" href="review.php?item='.$request_type.'&request='.$id_request.'&status=3">
                                   <i class="fa fa-trash"></i>
                                 </a>
                               </li>
@@ -233,12 +222,12 @@ function filter($list){
                             else if($request_status == 4){
                               print '
                               <li class="list-inline-item">
-                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Active" href="review.php?item='.$type.'&request='.$id_request.'&status=1">
+                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Active" href="review.php?item='.$request_type.'&request='.$id_request.'&status=1">
                                   <i class="fa fa-check"></i>
                                 </a>
                               </li>
                               <li class="list-inline-item">
-                                <a class="delete" data-toggle="tooltip" data-placement="top" title="Reject" href="review.php?item='.$type.'&request='.$id_request.'&status=3">
+                                <a class="delete" data-toggle="tooltip" data-placement="top" title="Reject" href="review.php?item='.$request_type.'&request='.$id_request.'&status=3">
                                   <i class="fa fa-trash"></i>
                                 </a>
                               </li>
@@ -246,7 +235,7 @@ function filter($list){
                             }else if($request_status == 1){
                               print '
                               <li class="list-inline-item">
-                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Finish" href="review.php?item='.$type.'&request='.$id_request.'&status=2">
+                                <a class="edit" data-toggle="tooltip" data-placement="top" title="Finish" href="review.php?item='.$request_type.'&request='.$id_request.'&status=2">
                                   <i class="fa fa-handshake-o"></i>
                                 </a>
                               </li>

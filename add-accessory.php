@@ -104,8 +104,36 @@
                                     <label for="helmets" class="py-2" style="cursor:pointer;">helmets</label>
                                 </div>
                                 <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
+                                    <input type="radio" name="itemTr" value="bottle" id="bottle" style="cursor:pointer;">
+                                    <label for="bottle" class="py-2" style="cursor:pointer;">Water bottle cage</label>
+                                </div>
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
                                     <input type="radio" name="itemTr" value="other" id="other" style="cursor:pointer;">
                                     <label for="other" class="py-2" style="cursor:pointer;">other</label>
+                                </div>
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white">
+                                    <input type="radio" name="itemTr" value="Panniers" id="Panniers" style="cursor:pointer;" checked>
+                                    <label for="Panniers" class="py-2" style="cursor:pointer;">Panniers</label>
+                                </div>
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
+                                    <input type="radio" name="itemTr" value="kit" id="kit" style="cursor:pointer;">
+                                    <label for="kit" class="py-2" style="cursor:pointer;">Repair kit</label>
+                                </div>
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
+                                    <input type="radio" name="itemTr" value="Pump" id="Pump" style="cursor:pointer;">
+                                    <label for="Pump" class="py-2" style="cursor:pointer;">Pump</label>
+                                </div>
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
+                                    <input type="radio" name="itemTr" value="Phone" id="Phone" style="cursor:pointer;">
+                                    <label for="Phone" class="py-2" style="cursor:pointer;">Phone mount</label>
+                                </div>
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
+                                    <input type="radio" name="itemTr" value="Fenders" id="Fenders" style="cursor:pointer;">
+                                    <label for="Fenders" class="py-2" style="cursor:pointer;">Fenders</label>
+                                </div>
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
+                                    <input type="radio" name="itemTr" value="Kickstand" id="Kickstand" style="cursor:pointer;">
+                                    <label for="Kickstand" class="py-2" style="cursor:pointer;">Kickstand</label>
                                 </div>
                             </div>
                             <h6 class="font-weight-bold pt-4 pb-1">Select Accessory Color:</h6>
@@ -118,7 +146,7 @@
                                 <option value="other">Other</option>
                             </select>
                             <h6 class="font-weight-bold pt-4 pb-1">Description:</h6>
-                            <textarea name="desc" id="desc" minlength="20" maxlength="300" class="border-0 p-3 w-100" rows="7" placeholder="Write details about your vehicle" required></textarea>
+                            <textarea name="desc" id="desc" minlength="20" maxlength="300" class="border-0 p-3 w-100" rows="7" placeholder="Write details about your accessory" required></textarea>
                             <div class="choose-file text-center pt-4 pb-1 rounded">
                                 <label for="file">
                                     <span class="d-block font-weight-bold text-dark">Accessory Image</span>

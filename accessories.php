@@ -105,7 +105,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 											extract($result);
 
 											print '
-												<li><a href="accessories.php?brand='.$brand.'">'.$brand.' <span>'.$count.'</span></a></li>
+												<li><a href="accessories.php?brand='.$accessory_brand.'">'.$accessory_brand.' <span>'.$count.'</span></a></li>
 											';
 										}
 								}
@@ -205,14 +205,14 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 													<div class="thumb-content">
 														<div class="price">$'.$rent_price_daily.'/d</div>
 														<a href="single_accessory.php?id_accessory='.$id_accessory.'">
-															<img class="biked-img-top img-fluid" src="assets/'.$image.'" alt="biked image cap">
+															<img class="biked-img-top img-fluid" src="assets/'.$accessory_image.'" alt="biked image cap">
 														</a>
 													</div>
 													<div class="biked-body">
 														<h4 class="biked-title"><a href="single_accessory.php?id_accessory='.$id_accessory.'">'.$accessory_name.'</a></h4>
 														<ul class="list-inline product-meta">
 															<li class="list-inline-item">
-																<a href="accessories.php?brand='.$brand.'"><i class="fa fa-folder-open-o"></i> '.$brand.'</a>
+																<a href=""><i class="fa fa-folder-open-o"></i> '.$accessory_brand.'</a>
 															</li>
 														</ul>
 													</div>
@@ -242,7 +242,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 											<div class="thumb-content">
 												<div class="price">$'.$rent_price_daily.'</div>
 												<a href="single_accessory.php?id_accessory='.$id_accessory.'">
-													<img src="assets/'.$image.'" class="img-fluid" alt="">
+													<img src="assets/'.$accessory_image.'" class="img-fluid" alt="">
 												</a>
 											</div>
 										</div>
@@ -256,7 +256,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 													<a href="single_accessory.php?id_accessory='.$id_accessory.'" class="font-weight-bold">'.$accessory_name.'</a>
 												</div>
 												<ul class="list-inline mt-2 mb-3">
-													<li class="list-inline-item"><a href="accessories.php?brand='.$brand.'"> <i class="fa fa-folder-open-o"></i>'.$brand.'</a></li>
+													<li class="list-inline-item"><a href=""> <i class="fa fa-folder-open-o"></i>'.$accessory_brand.'</a></li>
 												</ul>
 											</div>
 										</div>

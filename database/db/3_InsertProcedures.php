@@ -119,7 +119,7 @@ if ($conn->query($sql) === TRUE) {
 $conn->query("DROP PROCEDURE IF EXISTS bikeInsertProcedure");
 $sql = " CREATE PROCEDURE bikeInsertProcedure (
 		IN bikeName      text(50),
-		IN brand         text(50),
+		IN bike_brand         text(50),
 		IN material      text(50),
 		IN wheel_size    int(11),
 		IN color         text(50),
@@ -132,8 +132,8 @@ $sql = " CREATE PROCEDURE bikeInsertProcedure (
 		IN owner_id      int(11)
 		)
 	BEGIN 
-		INSERT INTO `bike`(`bike_name`, `brand`, `material`, `wheel_size`, `color`, `image`, `description`, `rent_price_daily`, `stock`, `start_age`, `end_age`, `owner_id`)
-		VALUES (bikeName, brand, material, wheel_size, color, img, descr, rpd, stock, start_age, end_age, owner_id);
+		INSERT INTO `bike`(`bike_name`, `bike_brand`, `material`, `wheel_size`, `color`, `image`, `description`, `rent_price_daily`, `stock`, `start_age`, `end_age`, `owner_id`)
+		VALUES (bikeName, bike_brand, material, wheel_size, color, img, descr, rpd, stock, start_age, end_age, owner_id);
 
 		SELECT LAST_INSERT_ID();
 	END;
@@ -156,11 +156,11 @@ $sql = " CREATE PROCEDURE AccessoryInsertProcedure (
 		IN img           	   text(50),
 		IN stock         	   int(11),
 		IN owner_id     	   int(11),
-		IN brand 			   text(50)
+		IN accessory_brand 			   text(50)
 		)
 	BEGIN 
-		INSERT INTO `bike_accessories`(`accessory_name`, `description`, `category`, `rent_price_daily`, `color`, `image`, `stock`, `owner_id`, `brand`)
-		VALUES (accessory_name, descr, category, rpd, color, img, stock, owner_id, brand);
+		INSERT INTO `bike_accessories`(`accessory_name`, `description`, `category`, `rent_price_daily`, `color`, `accessory_image`, `stock`, `owner_id`, `accessory_brand`)
+		VALUES (accessory_name, descr, category, rpd, color, img, stock, owner_id, accessory_brand);
 
 		SELECT LAST_INSERT_ID();
 	END;

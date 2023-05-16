@@ -72,15 +72,15 @@ if($temp = @mysqli_query($conn, "CALL SelectSingleaccessoryProcedure('".$_GET['i
 								<h1 class="product-title" id="name">'.$accessory_name.'</h1>
 								<div class="product-meta">
 									<ul class="list-inline">
-                                    <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Brand: <a href="home.php?brand='.$brand.'">'.$brand.'</a></li>
+                                    <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Brand: <a href="#">'.$accessory_brand.'</a></li>
                                     <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Color: <a href="home.php?brand='.$color.'">'.$color.'</a></li>
                                     <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Stock Quantity: <a href="home.php?brand='.$stock.'">'.$stock.'</a></li>
 									</ul>
 								</div>
 
 								<!-- product slider -->
-									<div class="my-4" data-image="assets/'.$image.'">
-										<img class="img-fluid w-100" src="assets/'.$image.'" alt="product-img">
+									<div class="my-4" data-image="assets/'.$accessory_image.'">
+										<img class="img-fluid w-100" src="assets/'.$accessory_image.'" alt="product-img">
 									</div>
 								<!-- product slider -->
 
@@ -93,7 +93,7 @@ if($temp = @mysqli_query($conn, "CALL SelectSingleaccessoryProcedure('".$_GET['i
 									</ul>
 									<div class="tab-content" id="pills-tabContent">
 										<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-											<h3 class="tab-title">Vehicle Description</h3>
+											<h3 class="tab-title">Accessory Description</h3>
 											<p>'.$description.'</p>
 
 										</div>

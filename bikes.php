@@ -112,7 +112,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 											extract($result);
 
 											print '
-												<li><a href="bikes.php?brand='.$brand.'">'.$brand.' <span>'.$count.'</span></a></li>
+												<li><a href="bikes.php?brand='.$bike_brand.'">'.$bike_brand.' <span>'.$count.'</span></a></li>
 											';
 										}
 								}
@@ -222,14 +222,14 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 													<div class="thumb-content">
 														<div class="price">$'.$rent_price_daily.'/d</div>
 														<a href="single.php?id_bike='.$id_bike.'">
-															<img class="biked-img-top img-fluid" src="assets/'.$image.'" alt="biked image cap">
+															<img class="biked-img-top img-fluid" src="assets/'.$bike_image.'" alt="biked image cap">
 														</a>
 													</div>
 													<div class="biked-body">
 														<h4 class="biked-title"><a href="single.php?id_bike='.$id_bike.'">'.$bike_name.'</a></h4>
 														<ul class="list-inline product-meta">
 															<li class="list-inline-item">
-																<a href="bikes.php?brand='.$brand.'"><i class="fa fa-folder-open-o"></i> '.$brand.'</a>
+																<a href=""><i class="fa fa-folder-open-o"></i> '.$bike_brand.'</a>
 															</li>
 														</ul>
 													</div>
@@ -259,7 +259,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 											<div class="thumb-content">
 												<div class="price">$'.$rent_price_daily.'</div>
 												<a href="single.php?id_bike='.$id_bike.'">
-													<img src="assets/'.$image.'" class="img-fluid" alt="">
+													<img src="assets/'.$bike_image.'" class="img-fluid" alt="">
 												</a>
 											</div>
 										</div>
@@ -273,7 +273,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 													<a href="single.php?id_bike='.$id_bike.'" class="font-weight-bold">'.$bike_name.'</a>
 												</div>
 												<ul class="list-inline mt-2 mb-3">
-													<li class="list-inline-item"><a href="bikes.php?brand='.$brand.'"> <i class="fa fa-folder-open-o"></i>'.$brand.'</a></li>
+													<li class="list-inline-item"><a href=""> <i class="fa fa-folder-open-o"></i>'.$bike_brand.'</a></li>
 												</ul>
 											</div>
 										</div>

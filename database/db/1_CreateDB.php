@@ -24,11 +24,11 @@
 			(
 			   id_bike              int(10) not null AUTO_INCREMENT,
 			   bike_name            text(50) not null,
-			   brand                text(50) not null,
+			   bike_brand                text(50) not null,
 			   material             text(50) not null,
 			   wheel_size           int(11) not null,
 			   color                text(50) not null,
-			   image                longtext not null,
+			   bike_image                longtext not null,
 			   description          text(300) not null,
 			   rent_price_daily     float(5) not null,
 			   stock				int(11) not null,
@@ -56,8 +56,8 @@
 			   stock				     int(11) not null,
 			   owner_id             	 int(11) not null,
 			   color                	 text(50) not null,
-			   image                	 longtext not null,
-			   brand 					 text(50) not null,
+			   accessory_image                	 longtext not null,
+			   accessory_brand 					 text(50) not null,
 			   creation_date        datetime not null DEFAULT CURRENT_TIMESTAMP,
 			   primary key (id_accessory)
 			)		
@@ -115,6 +115,7 @@
 			   id_user              int(10) not null,
 			   id_bike               int(10),
 			   id_accessory 		 int (10),
+			   request_type			text(50),
 			   reservation_date     datetime not null,
 			   request_status       int(1) not null DEFAULT '0',
 			   nb_rent_days         int(3) not null,

@@ -62,28 +62,6 @@ function filter($list){
 }
 ?>
 
-<section class="page-search">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<!-- Advance Search -->
-				<div class="advance-search">
-					<form action="#" id="form_search">
-						<div class="form-row">
-							<div class="form-group col-md-10">
-								<input type="text" class="form-control my-2 my-lg-1" id="search_text" placeholder="What are you looking for..">
-							</div>
-							<div class="form-group col-md-2 align-self-center">
-								<button onclick="return search_filter('<?php echo $filter_status; ?>')" class="btn btn-primary">Search Now</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
 <section class="dashboard section">
   <!-- Container Start -->
   <div class="container">
@@ -194,6 +172,17 @@ function filter($list){
                     $color = 'green';
                   }
 
+                  if($request_type == "bike"){
+                    $single = "single.php?id_bike=" . $id_bike;
+                    $brand = $bike_brand;
+                    $image = $bike_image;
+                  }
+                  else{
+                    $single = "single_accessory.php?id_accessory=" . $id_accessory;
+                    $brand = $accessory_brand;
+                    $image = $accessory_image;
+                  }
+
                   $body_req = '
                     <tr>
                       <td class="product-thumb">
@@ -210,7 +199,7 @@ function filter($list){
                         <div class="">
                           <ul class="list-inline justify-content-center">
                             <li class="list-inline-item">
-                              <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="single.php?id_bike='.$id_bike.'">
+                              <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="'.$single.'">
                                 <i class="fa fa-eye"></i>
                               </a>
                             </li>';

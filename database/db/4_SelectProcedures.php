@@ -26,21 +26,21 @@ if ($conn->query($sql) === TRUE) {
 
 
 //Create SelectAllBrand
-$conn->query("DROP PROCEDURE IF EXISTS SelectAllBikeBrandProcedure");
-$sql = "CREATE PROCEDURE SelectAllBikeBrandProcedure ()
+$conn->query("DROP PROCEDURE IF EXISTS SelectAllBrandProcedure");
+$sql = "CREATE PROCEDURE SelectAllBrandProcedure ()
 		READS SQL DATA
 		BEGIN 
-			SELECT brand, COUNT(*) as count 
+			SELECT bike_brand, COUNT(*) as count 
 			FROM bike 
-			GROUP BY brand 
+			GROUP BY bike_brand 
 			ORDER BY count DESC;
 		END;
 	";
 
 if ($conn->query($sql) === TRUE) {
-	echo "PROCEDURE SelectAllBikeBrandProcedure created successfully<br>";
+	echo "PROCEDURE SelectAllBrandProcedure created successfully<br>";
 } else {
-	echo "Error creating PROCEDURE SelectAllBikeBrandProcedure: " . $conn->error . "<br>";
+	echo "Error creating PROCEDURE SelectAllBrandProcedure: " . $conn->error . "<br>";
 }
 
 //Create SelectAllAccessoryBrand
@@ -48,9 +48,9 @@ $conn->query("DROP PROCEDURE IF EXISTS SelectAllAccessoryBrandProcedure");
 $sql = "CREATE PROCEDURE SelectAllAccessoryBrandProcedure ()
 		READS SQL DATA
 		BEGIN 
-			SELECT brand, COUNT(*) as count 
+			SELECT accessory_brand, COUNT(*) as count 
 			FROM bike_accessories 
-			GROUP BY brand 
+			GROUP BY accessory_brand 
 			ORDER BY count DESC;
 		END;
 	";
@@ -70,18 +70,18 @@ $sql = "CREATE PROCEDURE SelectAllbikesProcedure (
 		READS SQL DATA
 		BEGIN 
 			IF (brand_value = 'All') THEN
-				SELECT bike.id_bike, bike_name, brand,material,image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
+				SELECT bike.id_bike, bike_name, bike_brand,material,bike_image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
 				FROM bike AS bike
 				ORDER BY bike.rent_price_daily;
 			ELSEIF (brand_value = '5-All') THEN
-				SELECT bike.id_bike, bike_name, brand,material,image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
+				SELECT bike.id_bike, bike_name, bike_brand,material,bike_image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
 				FROM bike AS bike
 				ORDER BY bike.rent_price_daily
 				LIMIT 5;
 			ELSE
-				SELECT bike.id_bike, bike_name, brand,material,image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
+				SELECT bike.id_bike, bike_name, bike_brand,material,bike_image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
 				FROM bike AS bike
-				WHERE bike.brand = brand_value
+				WHERE bike.bike_brand = brand_value
 				ORDER BY bike.rent_price_daily;
 			END IF;
 		END;
@@ -101,18 +101,18 @@ $sql = "CREATE PROCEDURE SelectAllAccessoriesProcedure (
 		READS SQL DATA
 		BEGIN 
 			IF (brand_value = 'All') THEN
-				SELECT bike.id_accessory, accessory_name, brand,category,image,color,stock,bike.description,rent_price_daily
+				SELECT bike.id_accessory, accessory_name, accessory_brand,category,accessory_image,color,stock,bike.description,rent_price_daily
 				FROM bike_accessories AS bike
 				ORDER BY bike.rent_price_daily;
 			ELSEIF (brand_value = '5-All') THEN
-				SELECT bike.id_accessory, accessory_name, brand,category,image,color,stock,bike.description,rent_price_daily
+				SELECT bike.id_accessory, accessory_name, accessory_brand,category,accessory_image,color,stock,bike.description,rent_price_daily
 				FROM bike_accessories AS bike
 				ORDER BY bike.rent_price_daily
 				LIMIT 5;
 			ELSE
-				SELECT bike.id_accessory, accessory_name, brand,category,image,color,stock,bike.description,rent_price_daily
+				SELECT bike.id_accessory, accessory_name, accessory_brand,category,accessory_image,color,stock,bike.description,rent_price_daily
 				FROM bike_accessories AS bike
-				WHERE bike.brand = brand_value
+				WHERE bike.accessory_brand = brand_value
 				ORDER BY bike.rent_price_daily;
 			END IF;
 		END;
