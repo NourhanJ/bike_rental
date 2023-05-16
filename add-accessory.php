@@ -27,43 +27,45 @@
         $filesize = $_FILES["file"]["size"];
         $allowed_file_types = array('.jpg','.png','.jpeg','.gif');
 
-        if (in_array($file_ext,$allowed_file_types) && ($filesize < 200000))
-        {	
-            // Rename file
-            $newfilename = "image-" . time() . $file_ext;
+        // Rename file
+        $newfilename = "image-" . time() . $file_ext;
 
-            //move uploaded file to destination folder
-            move_uploaded_file($_FILES["file"]["tmp_name"], "assets/" . $newfilename);
-            $echo_msg = "File uploaded successfully.";
+        //move uploaded file to destination folder
+        move_uploaded_file($_FILES["file"]["tmp_name"], "assets/" . $newfilename);
+        $echo_msg = "File uploaded successfully.";
 
-            //insert data into database
-            REQUIRE_ONCE('database/db/0_Connection.php');
-            if($temp = @mysqli_query($conn, "CALL AccessoryInsertProcedure('$accessoryName', '$desc', '$itemTr', '$rpd', '$color', '$newfilename', '$stock', '$userid', '$BrandType')")){
-                while($result = @mysqli_fetch_assoc($temp))
-                    if ($result != null) {
-                        //redirect to accessories details page with the ID
-                        print "<script>location.replace(\"single_accessory.php?id_accessory=".$result['LAST_INSERT_ID()']."\");</script>";
-                    }
-            }
-            else $echo_msg = $conn->error;
+        //insert data into database
+        REQUIRE_ONCE('database/db/0_Connection.php');
+        if($temp = @mysqli_query($conn, "CALL AccessoryInsertProcedure('$accessoryName', '$desc', '$itemTr', '$rpd', '$color', '$newfilename', '$stock', '$userid', '$BrandType')")){
+            while($result = @mysqli_fetch_assoc($temp))
+                if ($result != null) {
+                    //redirect to accessories details page with the ID
+                    print "<script>location.replace(\"single_accessory.php?id_accessory=".$result['LAST_INSERT_ID()']."\");</script>";
+                }
+        }
+        else $echo_msg = $conn->error;
+
+        // if (in_array($file_ext,$allowed_file_types) && ($filesize < 200000))
+        // {	
             
-        }
-        elseif (empty($file_basename))
-        {	
-            // file selection error
-            $echo_msg = "Please select a file to upload.";
-        } 
-        elseif ($filesize > 200000)
-        {	
-            // file size error
-            $echo_msg = "The file you are trying to upload is too large.";
-        }
-        else
-        {
-            // file type error
-            $echo_msg = "Only these file typs are allowed for upload: " . implode(', ',$allowed_file_types);
-            unlink($_FILES["file"]["tmp_name"]);
-        }
+            
+        // }
+        // elseif (empty($file_basename))
+        // {	
+        //     // file selection error
+        //     $echo_msg = "Please select a file to upload.";
+        // } 
+        // elseif ($filesize > 200000)
+        // {	
+        //     // file size error
+        //     $echo_msg = "The file you are trying to upload is too large.";
+        // }
+        // else
+        // {
+        //     // file type error
+        //     $echo_msg = "Only these file types are allowed for upload: " . implode(', ',$allowed_file_types);
+        //     unlink($_FILES["file"]["tmp_name"]);
+        // }
 
         //Display error message using SweetAlert library
         echo "<script>
