@@ -132,7 +132,7 @@ $sql = " CREATE PROCEDURE bikeInsertProcedure (
 		IN owner_id      int(11)
 		)
 	BEGIN 
-		INSERT INTO `bike`(`bike_name`, `bike_brand`, `material`, `wheel_size`, `color`, `image`, `description`, `rent_price_daily`, `stock`, `start_age`, `end_age`, `owner_id`)
+		INSERT INTO `bike`(`bike_name`, `bike_brand`, `material`, `wheel_size`, `color`, `bike_image`, `description`, `rent_price_daily`, `stock`, `start_age`, `end_age`, `owner_id`)
 		VALUES (bikeName, bike_brand, material, wheel_size, color, img, descr, rpd, stock, start_age, end_age, owner_id);
 
 		SELECT LAST_INSERT_ID();
