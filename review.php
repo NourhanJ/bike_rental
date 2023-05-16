@@ -41,7 +41,7 @@ $h_req = array();
 
 // if($temp = @mysqli_query($conn, "CALL SelectReviewRequestProcedure('".$_COOKIE['CR-userID']."')")){
 // if($temp = @mysqli_query($conn, "SELECT * FROM request, bike, bike_accessories, users WHERE (bike.owner_id = '".$_COOKIE['CR-userID']."' AND bike.id_bike = request.id_bike) OR (bike_accessories.owner_id = '".$_COOKIE['CR-userID']."' AND bike_accessories.id_accessory = request.id_accessory) GROUP BY request.id_request;")){
-  if($temp = @mysqli_query($conn, "SELECT * FROM request LEFT JOIN bike ON bike.owner_id='".$_COOKIE['CR-userID']."' AND bike.id_bike = request.id_bike LEFT JOIN bike_accessories ON bike_accessories.owner_id='".$_COOKIE['CR-userID']."' AND bike_accessories.id_accessory = request.id_accessory JOIN users GROUP BY request.id_request;")){
+  if($temp = @mysqli_query($conn, "SELECT * FROM request LEFT JOIN bike ON bike.owner_id='".$_COOKIE['CR-userID']."' AND bike.id_bike = request.id_bike LEFT JOIN bike_accessories ON bike_accessories.owner_id='".$_COOKIE['CR-userID']."' AND bike_accessories.id_accessory = request.id_accessory JOIN users WHERE users.id_user = request.id_user GROUP BY request.id_request;")){
   while($result = @mysqli_fetch_assoc($temp))
     if ($result != null) {
       $req_count[0]++;
