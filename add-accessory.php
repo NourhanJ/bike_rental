@@ -79,7 +79,7 @@
 
 <section class="bg-gray py-5">
     <div class="container">
-        <form action="" enctype="multipart/form-data" method="POST">
+        <form action="#" enctype="multipart/form-data" method="POST">
             <!-- Post Your ad start -->
             <fieldset class="border border-gary p-4 mb-5">
                     <div class="row">
