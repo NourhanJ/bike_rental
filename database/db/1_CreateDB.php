@@ -142,7 +142,7 @@
 			   l_name               text(50) not null,
 			   tel                  varchar(9) not null UNIQUE,
 			   addres               text(100) not null,
-			   date_of_birth        date not null,
+			   age        			int(11) not null,
 			   creation_date        datetime not null DEFAULT CURRENT_TIMESTAMP,
 			   primary key (id_user)
 			)

@@ -36,6 +36,12 @@ function filter($list){
 		if($list['end_age'] > $range_date[1] || $list['start_age'] < $range_date[0])
 			return false;
 	}
+	else{
+		if(isset($_GET['age']) && !empty($_GET['age'])){
+			if($list['end_age'] < $_GET['age'] || $list['start_age'] > $_GET['age'])
+			return false;
+		}
+	}
 
 	//price
 	if(isset($_GET['prd']) && !empty($_GET['prd'])){
@@ -153,11 +159,23 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 
 					<div class="widget price-range w-100">
 						<h4 class="widget-header">Age</h4>
-						<div class="block">
-							<input class="range-track-y w-100" type="text" data-slider-min="5" data-slider-max="50" data-slider-step="1" data-slider-value="[5,50]">
-							<div class="justify-content-between mt-2">
-								<span class="year-value"><?php echo (isset($_GET['ym']) && !empty($_GET['ym']))? $_GET['ym'] : '5 - 50'; ?></span>
+						<?php
+						if(!isset($_GET['age_toggle']) || $_GET['age_toggle'] === 'off'){
+							?>
+							<div class="block">
+								<input class="range-track-y w-100" type="text" data-slider-min="5" data-slider-max="50" data-slider-step="1" data-slider-value="[5,50]">
+								<div class="justify-content-between mt-2">
+									<span class="year-value"><?php echo (isset($_GET['ym']) && !empty($_GET['ym']))? $_GET['ym'] : '5 - 50'; ?></span>
+								</div>
 							</div>
+							<?php
+						}
+						?>
+
+						<!-- Add the on/off switch -->
+						<div class="form-check mt-3">
+						<input class="form-check-input" type="checkbox" id="age-toggle" name="age_toggle" <?php echo (isset($_GET['age_toggle']) && $_GET['age_toggle'] === 'on') ? 'checked' : ''; ?>>
+						<label class="form-check-label" for="age-toggle">Match Your Age</label>
 						</div>
 					</div>
 
@@ -297,6 +315,23 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 <?php require_once('footer.php'); ?>
 
 <script>
+	const ageToggle = document.getElementById('age-toggle');
+  
+  ageToggle.addEventListener('change', function() {
+    const checked = ageToggle.checked;
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if (checked) {
+      urlParams.set('age_toggle', 'on');
+	  var userAge = <?php echo $_COOKIE['CR-userAGE']; ?>; // Replace with the actual user's age
+	  urlParams.set('age', userAge);
+    } else {
+      urlParams.delete('age_toggle');
+    }
+    
+    window.location.search = urlParams.toString();
+  });
+  
 function switch_g_l(view_type){
 	if(view_type == "l"){
 		document.getElementById("list-view").style.display = "";
@@ -340,8 +375,18 @@ function search_filter(brand){
 		link+= "&color="+ym_val;
 
 	//age
-	var ym_val = document.querySelector(".year-value").innerHTML;
-		link+= "&ym="+ym_val;
+	var ageToggle = document.getElementById('age-toggle');
+	if (ageToggle.checked) {
+		// Fetch the user's age from the database
+		var userAge = <?php echo $_COOKIE['CR-userAGE']; ?>; // Replace with the actual user's age
+		link += "&age=" + userAge;
+	} else {
+		// age
+		var ym_val = document.querySelector(".year-value").innerHTML;
+		link += "&ym=" + ym_val;
+	}
+	// var ym_val = document.querySelector(".year-value").innerHTML;
+	// 	link+= "&ym="+ym_val;
 
 	//Price Range Daily
 	var prd_v = document.querySelector(".value").innerHTML;

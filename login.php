@@ -20,6 +20,7 @@ else if(isset($_GET['submit'])){
     if($user != null){
         // $userID = mysqli_insert_id($conn);
         setcookie('CR-userID', $user['id_user'], time() + (24*60*60*1000), "/");
+        setcookie('CR-userAGE', $user['age'], time() + (24*60*60*1000), "/");
         // Passwords match, allow user to log in
         header("Location:index.php");
         

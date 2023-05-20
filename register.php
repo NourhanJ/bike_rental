@@ -7,7 +7,7 @@ if(isset($_COOKIE['CR-userID']) && !empty($_COOKIE['CR-userID'])){
 else if(isset($_POST['submit'])){
     $firstName = $_POST['first-name'];
     $lastName = $_POST['last-name'];
-    $dob = $_POST['dob'];
+    $age = $_POST['age'];
     $tel = $_POST['tel'];
     $address = $_POST['address'];
     $username = $_POST['username'];
@@ -16,7 +16,7 @@ else if(isset($_POST['submit'])){
     // $password = md5($password);
     // echo password_hash($password, PASSWORD_DEFAULT);
     
-    $query = "INSERT INTO users (`username`, `password`, `f_name`, `l_name`, `tel`, `addres`, `date_of_birth`) VALUES ('$username', '$password', '$firstName', '$lastName', '$tel', '$address', '$dob')";
+    $query = "INSERT INTO users (`username`, `password`, `f_name`, `l_name`, `tel`, `addres`, `age`) VALUES ('$username', '$password', '$firstName', '$lastName', '$tel', '$address', '$age')";
     include('database/db/0_Connection.php');
     if(mysqli_query($conn, $query)){
         $userID = mysqli_insert_id($conn);
@@ -79,8 +79,8 @@ else if(isset($_POST['submit'])){
                                 <input type="text" name="last-name" maxlength="50" minlength="3" placeholder="Last Name" class="border p-3 w-100 my-2" required>
                               </div>
                               <div class="form-group">
-                                <label for="dob">Date Of Birthday</label>
-                                <input type="date" name="dob" class="border p-3 w-100 my-2" required>
+                                <label for="age">Age</label>
+                                <input type="number" name="age" class="border p-3 w-100 my-2" required>
                               </div>
                               <div class="form-group">
                                 <label for="tel">Telphone Number</label>
@@ -124,9 +124,9 @@ else if(isset($_POST['submit'])){
 <script>
 
 //set max dob date
-var gt_18 = new Date();
-gt_18.setDate(gt_18.getDate() - 6570);
-document.getElementById("dob").max = gt_18.toISOString().slice(0, 10);
+// var gt_18 = new Date();
+// gt_18.setDate(gt_18.getDate() - 6570);
+// document.getElementById("dob").max = gt_18.toISOString().slice(0, 10);
 
 function validate(){
   var pass1 = document.getElementById("pass");
