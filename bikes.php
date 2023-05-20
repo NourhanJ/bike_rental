@@ -327,6 +327,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 	  urlParams.set('age', userAge);
     } else {
       urlParams.delete('age_toggle');
+	  urlParams.delete('age');
     }
     
     window.location.search = urlParams.toString();
