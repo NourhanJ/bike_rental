@@ -34,6 +34,7 @@
 			   stock				int(11) not null,
 			   start_age			int(11) not null,
 			   end_age				int(11) not null,
+			   gender 				text(100) not null,
 			   creation_date        datetime not null DEFAULT CURRENT_TIMESTAMP,
 			   owner_id             int(11) not null,
 			   primary key (id_bike)
@@ -56,6 +57,7 @@
 			   stock				     int(11) not null,
 			   owner_id             	 int(11) not null,
 			   color                	 text(50) not null,
+			   gender 					 text(100) not null,
 			   accessory_image                	 longtext not null,
 			   accessory_brand 					 text(50) not null,
 			   creation_date        datetime not null DEFAULT CURRENT_TIMESTAMP,
@@ -143,6 +145,7 @@
 			   tel                  varchar(9) not null UNIQUE,
 			   addres               text(100) not null,
 			   age        			int(11) not null,
+			   gender 				varchar(100) not null,
 			   creation_date        datetime not null DEFAULT CURRENT_TIMESTAMP,
 			   primary key (id_user)
 			)

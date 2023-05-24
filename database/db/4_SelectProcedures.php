@@ -70,16 +70,16 @@ $sql = "CREATE PROCEDURE SelectAllbikesProcedure (
 		READS SQL DATA
 		BEGIN 
 			IF (brand_value = 'All') THEN
-				SELECT bike.id_bike, bike_name, bike_brand,material,bike_image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
+				SELECT bike.id_bike, bike_name, bike_brand,gender,material,bike_image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
 				FROM bike AS bike
 				ORDER BY bike.rent_price_daily;
 			ELSEIF (brand_value = '5-All') THEN
-				SELECT bike.id_bike, bike_name, bike_brand,material,bike_image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
+				SELECT bike.id_bike, bike_name, bike_brand,gender,material,bike_image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
 				FROM bike AS bike
 				ORDER BY bike.rent_price_daily
 				LIMIT 5;
 			ELSE
-				SELECT bike.id_bike, bike_name, bike_brand,material,bike_image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
+				SELECT bike.id_bike, bike_name, bike_brand,gender,material,bike_image,color,wheel_size,start_age,end_age,stock,bike.description,rent_price_daily,AverageRatingFunction(bike.id_bike) 'avg_rating',AvailableDateFunction(bike.id_bike) 'available_date'
 				FROM bike AS bike
 				WHERE bike.bike_brand = brand_value
 				ORDER BY bike.rent_price_daily;
@@ -101,16 +101,16 @@ $sql = "CREATE PROCEDURE SelectAllAccessoriesProcedure (
 		READS SQL DATA
 		BEGIN 
 			IF (brand_value = 'All') THEN
-				SELECT bike.id_accessory, accessory_name, accessory_brand,category,accessory_image,color,stock,bike.description,rent_price_daily
+				SELECT bike.id_accessory, accessory_name,gender, accessory_brand,category,accessory_image,color,stock,bike.description,rent_price_daily
 				FROM bike_accessories AS bike
 				ORDER BY bike.rent_price_daily;
 			ELSEIF (brand_value = '5-All') THEN
-				SELECT bike.id_accessory, accessory_name, accessory_brand,category,accessory_image,color,stock,bike.description,rent_price_daily
+				SELECT bike.id_accessory, accessory_name,gender, accessory_brand,category,accessory_image,color,stock,bike.description,rent_price_daily
 				FROM bike_accessories AS bike
 				ORDER BY bike.rent_price_daily
 				LIMIT 5;
 			ELSE
-				SELECT bike.id_accessory, accessory_name, accessory_brand,category,accessory_image,color,stock,bike.description,rent_price_daily
+				SELECT bike.id_accessory, accessory_name,gender, accessory_brand,category,accessory_image,color,stock,bike.description,rent_price_daily
 				FROM bike_accessories AS bike
 				WHERE bike.accessory_brand = brand_value
 				ORDER BY bike.rent_price_daily;

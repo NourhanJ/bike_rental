@@ -12,11 +12,9 @@ else if(isset($_POST['submit'])){
     $address = $_POST['address'];
     $username = $_POST['username'];
     $password = md5($_POST['pass']);
-    echo $_POST['pass'];
-    // $password = md5($password);
-    // echo password_hash($password, PASSWORD_DEFAULT);
+    $gender = $_POST['gender'];
     
-    $query = "INSERT INTO users (`username`, `password`, `f_name`, `l_name`, `tel`, `addres`, `age`) VALUES ('$username', '$password', '$firstName', '$lastName', '$tel', '$address', '$age')";
+    $query = "INSERT INTO users (`username`, `password`, `f_name`, `l_name`, `tel`, `addres`, `age`, `gender`) VALUES ('$username', '$password', '$firstName', '$lastName', '$tel', '$address', '$age', '$gender')";
     include('database/db/0_Connection.php');
     if(mysqli_query($conn, $query)){
         $userID = mysqli_insert_id($conn);
@@ -81,6 +79,14 @@ else if(isset($_POST['submit'])){
                               <div class="form-group">
                                 <label for="age">Age</label>
                                 <input type="number" name="age" class="border p-3 w-100 my-2" required>
+                              </div>
+                              <div class="widget price-range w-100">
+                                <h4 class="widget-header">Gender</h4>
+                                <input type="radio" name="gender" value="male" id="male" style="cursor:pointer;" checked>
+                                <label for="male" class="py-2" style="cursor:pointer;">Male</label>
+                                <br>
+                                <input type="radio" name="gender" value="female" id="female" style="cursor:pointer;">
+                                <label for="female" class="py-2" style="cursor:pointer;">Female</label>
                               </div>
                               <div class="form-group">
                                 <label for="tel">Telphone Number</label>

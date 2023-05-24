@@ -35,7 +35,7 @@
 
             //insert to database
             REQUIRE_ONCE('database/db/0_Connection.php');
-            if($temp = @mysqli_query($conn, "CALL bikeInsertProcedure('$bikeName','$BrandType','$itemTr', '$wheel', '$color', '$newfilename','$desc','$rpd', '$stock', '$start_age', '$end_age', '$userid')")){
+            if($temp = @mysqli_query($conn, "CALL bikeInsertProcedure('$bikeName','$BrandType','$itemTr', '$wheel', '$color', '$newfilename','$desc','$rpd', '$stock', '$start_age', '$end_age', '$userid', '$gender')")){
                 while($result = @mysqli_fetch_assoc($temp))
                     if ($result != null) {
                         print "<script>location.replace(\"single.php?id_bike=".$result['LAST_INSERT_ID()']."\");</script>";
@@ -149,6 +149,18 @@
                             <h4 class="widget-header">Age Range:</h4>
                             From: <input type="number" name="start_age" id="stock" class="border-0 p-2 bg-white text-capitalize" min="1" max="200" value="30" required>
                             To: <input type="number" name="end_age" id="stock" class="border-0 p-2 bg-white text-capitalize" min="1" max="200" value="30" required>
+
+                            <h6 class="font-weight-bold pt-4 pb-1">Gender:</h6>
+                            <div class="row px-3">
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white">
+                                    <input type="radio" name="gender" value="male" id="male" style="cursor:pointer;" checked>
+                                    <label for="male" class="py-2" style="cursor:pointer;">Male</label>
+                                </div>
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
+                                    <input type="radio" name="gender" value="female" id="female" style="cursor:pointer;">
+                                    <label for="female" class="py-2" style="cursor:pointer;">Female</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
             </fieldset>

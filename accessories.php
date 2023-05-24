@@ -30,6 +30,12 @@ function filter($list){
 			return false;
 	}
 
+	//gender
+	if(isset($_GET['gender']) && !empty($_GET['gender'])){
+		if($list['gender'] != $_GET['gender'])
+			return false;
+	}
+
 	//price
 	if(isset($_GET['prd']) && !empty($_GET['prd'])){
 		$range_date = explode(" - ", $_GET['prd']);
@@ -142,6 +148,30 @@ REQUIRE_ONCE('database/db/0_Connection.php');
                                 <option value="White">White</option>
                                 <option value="other">Other</option>
                         </select>
+					</div>
+
+					<div class="widget price-range w-100">
+						<?php
+						if(!isset($_GET['gender_toggle']) || $_GET['gender_toggle'] === 'off'){
+							?>
+						<h4 class="widget-header">Gender</h4>
+						<input type="radio" name="gender" value="All" id="All" style="cursor:pointer;" checked>
+						<label for="All" class="py-2" style="cursor:pointer;">All</label>
+						<br>
+						<input type="radio" name="gender" value="male" id="male" style="cursor:pointer;" <?php echo (isset($_GET['gender']) && $_GET['gender']=='male')? 'checked' : ''; ?>>
+						<label for="male" class="py-2" style="cursor:pointer;">Male</label>
+						<br>	
+						<input type="radio" name="gender" value="female" id="female" style="cursor:pointer;" <?php echo (isset($_GET['gender']) && $_GET['gender']=='female')? 'checked' : ''; ?>>
+						<label for="female" class="py-2" style="cursor:pointer;">Female</label>
+						<?php
+						}
+						?>
+
+						<!-- Add the on/off switch -->
+						<div class="form-check mt-3">
+							<input class="form-check-input" type="checkbox" id="gender-toggle" name="gender-toggle" <?php echo (isset($_GET['gender_toggle']) && $_GET['gender_toggle'] === 'on') ? 'checked' : ''; ?>>
+							<label class="form-check-label" for="gender-toggle">Match Your Gender</label>
+						</div>
 					</div>
 
 					<div class="widget price-range w-100">
@@ -280,6 +310,23 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 <?php require_once('footer.php'); ?>
 
 <script>
+	const genderToggle = document.getElementById('gender-toggle');
+
+	genderToggle.addEventListener('change', function() {
+    const checked = genderToggle.checked;
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if (checked) {
+      urlParams.set('gender_toggle', 'on');
+	  var userGender = <?= $_COOKIE['CR-userGENDER']; ?>;
+	  urlParams.set('gender', userGender.value);
+    } else {
+      urlParams.delete('gender_toggle');
+	  urlParams.delete('gender');
+    }
+    
+    window.location.search = urlParams.toString();
+  });
 function switch_g_l(view_type){
 	if(view_type == "l"){
 		document.getElementById("list-view").style.display = "";
@@ -322,6 +369,19 @@ function search_filter(brand){
 	if(ym_val != "All")
 		link+= "&color="+ym_val;
 
+	//gender
+	var genderToggle = document.getElementById('gender-toggle');
+	if (genderToggle.checked) {
+		// Fetch the user's age from the database
+		var userGender = <?php echo $_COOKIE['CR-userGENDER']; ?>;
+		link += "&gender=" + userGender;
+	} else {
+		// age
+		var gender = $('input[name="gender"]:checked').val();
+		if(gender != "All")
+		link += "&gender=" + gender;
+	}
+	
 	//Price Range Daily
 	var prd_v = document.querySelector(".value").innerHTML;
 	if(prd_v != "$0 - $200"){

@@ -129,11 +129,12 @@ $sql = " CREATE PROCEDURE bikeInsertProcedure (
 		IN stock         int(11),
 		IN start_age     int(11),
 		IN end_age       int(11),
-		IN owner_id      int(11)
+		IN owner_id      int(11),
+		IN gender 		 text(100)
 		)
 	BEGIN 
-		INSERT INTO `bike`(`bike_name`, `bike_brand`, `material`, `wheel_size`, `color`, `bike_image`, `description`, `rent_price_daily`, `stock`, `start_age`, `end_age`, `owner_id`)
-		VALUES (bikeName, bike_brand, material, wheel_size, color, img, descr, rpd, stock, start_age, end_age, owner_id);
+		INSERT INTO `bike`(`bike_name`, `bike_brand`, `material`, `wheel_size`, `color`, `bike_image`, `description`, `rent_price_daily`, `stock`, `start_age`, `end_age`, `owner_id`, `gender`)
+		VALUES (bikeName, bike_brand, material, wheel_size, color, img, descr, rpd, stock, start_age, end_age, owner_id, gender);
 
 		SELECT LAST_INSERT_ID();
 	END;
@@ -156,11 +157,12 @@ $sql = " CREATE PROCEDURE AccessoryInsertProcedure (
 		IN img           	   text(50),
 		IN stock         	   int(11),
 		IN owner_id     	   int(11),
-		IN accessory_brand 			   text(50)
+		IN accessory_brand 			   text(50),
+		IN gender 			   text(100)
 		)
 	BEGIN 
-		INSERT INTO `bike_accessories`(`accessory_name`, `description`, `category`, `rent_price_daily`, `color`, `accessory_image`, `stock`, `owner_id`, `accessory_brand`)
-		VALUES (accessory_name, descr, category, rpd, color, img, stock, owner_id, accessory_brand);
+		INSERT INTO `bike_accessories`(`accessory_name`, `description`, `category`, `rent_price_daily`, `color`, `accessory_image`, `stock`, `owner_id`, `accessory_brand`, `gender`)
+		VALUES (accessory_name, descr, category, rpd, color, img, stock, owner_id, accessory_brand, gender);
 
 		SELECT LAST_INSERT_ID();
 	END;

@@ -43,6 +43,12 @@ function filter($list){
 		}
 	}
 
+	//gender
+	if(isset($_GET['gender']) && !empty($_GET['gender'])){
+		if($list['gender'] != $_GET['gender'])
+			return false;
+	}
+
 	//price
 	if(isset($_GET['prd']) && !empty($_GET['prd'])){
 		$range_date = explode(" - ", $_GET['prd']);
@@ -142,6 +148,30 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 						<br>
 						<input type="radio" name="bikeMaterial" value="Titanium" id="Titanium" style="cursor:pointer;" <?php echo (isset($_GET['tr']) && $_GET['tr']=='Titanium')? 'checked' : ''; ?>>
 						<label for="Titanium" class="py-2" style="cursor:pointer;">Titanium</label>
+					</div>
+
+					<div class="widget price-range w-100">
+						<?php
+						if(!isset($_GET['gender_toggle']) || $_GET['gender_toggle'] === 'off'){
+							?>
+						<h4 class="widget-header">Gender</h4>
+						<input type="radio" name="gender" value="All" id="All" style="cursor:pointer;" checked>
+						<label for="All" class="py-2" style="cursor:pointer;">All</label>
+						<br>
+						<input type="radio" name="gender" value="male" id="male" style="cursor:pointer;" <?php echo (isset($_GET['gender']) && $_GET['gender']=='male')? 'checked' : ''; ?>>
+						<label for="male" class="py-2" style="cursor:pointer;">Male</label>
+						<br>	
+						<input type="radio" name="gender" value="female" id="female" style="cursor:pointer;" <?php echo (isset($_GET['gender']) && $_GET['gender']=='female')? 'checked' : ''; ?>>
+						<label for="female" class="py-2" style="cursor:pointer;">Female</label>
+						<?php
+						}
+						?>
+
+						<!-- Add the on/off switch -->
+						<div class="form-check mt-3">
+							<input class="form-check-input" type="checkbox" id="gender-toggle" name="gender-toggle" <?php echo (isset($_GET['gender_toggle']) && $_GET['gender_toggle'] === 'on') ? 'checked' : ''; ?>>
+							<label class="form-check-label" for="gender-toggle">Match Your Gender</label>
+						</div>
 					</div>
 					
 					<div class="widget price-range w-100">
@@ -316,6 +346,7 @@ REQUIRE_ONCE('database/db/0_Connection.php');
 
 <script>
 	const ageToggle = document.getElementById('age-toggle');
+	const genderToggle = document.getElementById('gender-toggle');
   
   ageToggle.addEventListener('change', function() {
     const checked = ageToggle.checked;
@@ -328,6 +359,22 @@ REQUIRE_ONCE('database/db/0_Connection.php');
     } else {
       urlParams.delete('age_toggle');
 	  urlParams.delete('age');
+    }
+    
+    window.location.search = urlParams.toString();
+  });
+
+  genderToggle.addEventListener('change', function() {
+    const checked = genderToggle.checked;
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if (checked) {
+      urlParams.set('gender_toggle', 'on');
+	  var userGender = <?= $_COOKIE['CR-userGENDER']; ?>;
+	  urlParams.set('gender', userGender.value);
+    } else {
+      urlParams.delete('gender_toggle');
+	  urlParams.delete('gender');
     }
     
     window.location.search = urlParams.toString();
@@ -385,6 +432,19 @@ function search_filter(brand){
 		// age
 		var ym_val = document.querySelector(".year-value").innerHTML;
 		link += "&ym=" + ym_val;
+	}
+
+	//gender
+	var genderToggle = document.getElementById('gender-toggle');
+	if (genderToggle.checked) {
+		// Fetch the user's age from the database
+		var userGender = <?php echo $_COOKIE['CR-userGENDER']; ?>;
+		link += "&gender=" + userGender;
+	} else {
+		// age
+		var gender = $('input[name="gender"]:checked').val();
+		if(gender != "All")
+		link += "&gender=" + gender;
 	}
 	// var ym_val = document.querySelector(".year-value").innerHTML;
 	// 	link+= "&ym="+ym_val;

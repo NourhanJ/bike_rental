@@ -36,7 +36,7 @@
 
         //insert data into database
         REQUIRE_ONCE('database/db/0_Connection.php');
-        if($temp = @mysqli_query($conn, "CALL AccessoryInsertProcedure('$accessoryName', '$desc', '$itemTr', '$rpd', '$color', '$newfilename', '$stock', '$userid', '$BrandType')")){
+        if($temp = @mysqli_query($conn, "CALL AccessoryInsertProcedure('$accessoryName', '$desc', '$itemTr', '$rpd', '$color', '$newfilename', '$stock', '$userid', '$BrandType', '$gender')")){
             while($result = @mysqli_fetch_assoc($temp))
                 if ($result != null) {
                     //redirect to accessories details page with the ID
@@ -169,6 +169,18 @@
                                 <option value="AeroFit">AeroFit</option>
                                 <option value="other">Other</option>
                             </select>
+
+                            <h6 class="font-weight-bold pt-4 pb-1">Gender:</h6>
+                            <div class="row px-3">
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white">
+                                    <input type="radio" name="gender" value="male" id="male" style="cursor:pointer;" checked>
+                                    <label for="male" class="py-2" style="cursor:pointer;">Male</label>
+                                </div>
+                                <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
+                                    <input type="radio" name="gender" value="female" id="female" style="cursor:pointer;">
+                                    <label for="female" class="py-2" style="cursor:pointer;">Female</label>
+                                </div>
+                            </div>
                             
                             <h6 class="font-weight-bold pt-4 pb-1" style="margin-top:3%">Daily Rental Price ($ USD):</h6>
                             <input type="number" name="rpd" id="rpd" class="border-0 w-100 p-2 bg-white text-capitalize" min="1" max="200" value="30" required>
